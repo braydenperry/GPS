@@ -9,7 +9,7 @@ namespace GPS.Service
         static void Main(string[] args)
         {
             //Get a list of all outages from the .sof file
-            Parser sofParser = new Parser("current.sof");
+            Parser sofParser = new Parser("SOF\\current.sof");
             List<Outage> allOutages = sofParser.PopulateObjectsFromSof();
 
             //This is just a test to make sure everything was populated
