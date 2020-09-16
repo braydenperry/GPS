@@ -32,6 +32,8 @@ namespace GPS.Data
             List<Outage> allOutages = new List<Outage>();
             foreach (Historical historicalOutage in Outages.HistoricalOutages)
             {
+                //Add validation here!
+
                 allOutages.Add(new Outage
                 {
                     TagName = "HISTORICAL",
@@ -55,6 +57,8 @@ namespace GPS.Data
 
             foreach (Current currentOutage in Outages.CurrentOutages)
             {
+                //Add validation here!
+
                 allOutages.Add(new Outage
                 {
                     TagName = "CURRENT",
@@ -73,6 +77,8 @@ namespace GPS.Data
 
             foreach (Predicted predictedOutage in Outages.PredictedOutages)
             {
+                //Add validation here!
+
                 allOutages.Add(new Outage
                 {
                     TagName = "PREDICTED",
