@@ -14,7 +14,7 @@ namespace GPS.Test
 
         public ParserShould()
         {
-            _parser = new Parser("current.sof");
+            _parser = new Parser("SOF\\current.sof");
             _allOutages = _parser.PopulateObjectsFromSof();
         }
 
