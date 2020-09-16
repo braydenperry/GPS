@@ -18,8 +18,6 @@ namespace GPS.Service
             {
                 Console.WriteLine(outages.StartYear);
             }
-
-            Console.WriteLine("I'm trying to break stuff... but not really. Please work!");
         }
     }
 }

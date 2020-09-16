@@ -14,7 +14,6 @@ namespace GPS.Test
 
         public ParserShould()
         {
-            Console.WriteLine("I'm trying to break stuff... but not really. Please work!");
             _parser = new Parser("current.sof");
             _allOutages = _parser.PopulateObjectsFromSof();
         }

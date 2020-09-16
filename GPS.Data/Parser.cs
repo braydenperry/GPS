@@ -89,9 +89,6 @@ namespace GPS.Data
                 });
             }
 
-
-            Console.WriteLine("I'm trying to break stuff... but not really. Please work!");
-
             return allOutages;
         }
     }
