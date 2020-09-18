@@ -1,6 +1,9 @@
 ﻿using GPS.Data;
 using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GPS.Service
 {
@@ -11,10 +14,12 @@ namespace GPS.Service
             //Get a list of all outages from the .sof file
             Parser sofParser = new Parser("SOF\\current.sof");
             List<Outage> allOutages = sofParser.PopulateObjectsFromSof();
+            foreach (var outages in
 
-            //This is just a test to make sure everything was populated
-            //this will be moved to the xunit test later
-            foreach (Outage outages in allOutages)
+            //Example of LINQ
+            from Outage outages in allOutages
+            where outages.StartYear == 2020
+            select outages)
             {
                 Console.WriteLine(outages.StartYear);
             }
