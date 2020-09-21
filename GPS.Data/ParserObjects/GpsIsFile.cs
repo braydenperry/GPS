@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace GPS.Data
+namespace GPS.Data.ParserObjects
 {
 	/// <summary>
 	/// Global Positioning System Information Service File

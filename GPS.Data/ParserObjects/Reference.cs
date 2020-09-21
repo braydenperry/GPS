@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace GPS.Data
+namespace GPS.Data.ParserObjects
 {
 	/// <summary>
 	/// Time and date up to which the satellite outage data was collected

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using GPS.Data.ParserObjects;
 
 namespace GPS.Data
 {

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace GPS.Data
+namespace GPS.Data.ParserObjects
 {
 	/// <summary>
 	/// Time and date of the creation of the satellite outage file

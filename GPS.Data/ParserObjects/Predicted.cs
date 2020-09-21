@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace GPS.Data
+namespace GPS.Data.ParserObjects
 {
-	public class Current
+	public class Predicted
 	{
 		/// <summary>
 		/// Reusable identifier for each satellite in identified system
@@ -32,31 +32,31 @@ namespace GPS.Data
 		public int Reference { get; set; }
 
 		/// <summary>
-		/// Year when the outage began
+		/// Year when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_YEAR")]
 		public int StartYear { get; set; }
 
 		/// <summary>
-		/// Day of year (1—365) when the outage began
+		/// Day of year (1—365) when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_DOY")]
 		public int StartDayOfYear { get; set; }
 
 		/// <summary>
-		/// Hour when the outage began
+		/// Hour when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_HR")]
 		public int StartHour { get; set; }
 
 		/// <summary>
-		/// Minute when the outage began
+		/// Minute when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_MIN")]
 		public int StartMinute { get; set; }
 
 		/// <summary>
-		/// Second when the outage began
+		/// Second when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_SEC")]
 		public int StartSecond { get; set; }
