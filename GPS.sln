@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Tests", "GPS.Tests\GPS.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Data", "GPS.Data\GPS.Data.csproj", "{D6FF63E2-DE08-43ED-A4FD-58ED7DC503A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Service", "GPS.WebApp\GPS.Service.csproj", "{4CCC98D5-8A42-4C97-A1FE-D70569639B49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Service", "GPS.Service\GPS.Service.csproj", "{F33B9B96-E297-40D6-8630-49EA394B4EAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{D6FF63E2-DE08-43ED-A4FD-58ED7DC503A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6FF63E2-DE08-43ED-A4FD-58ED7DC503A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6FF63E2-DE08-43ED-A4FD-58ED7DC503A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CCC98D5-8A42-4C97-A1FE-D70569639B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CCC98D5-8A42-4C97-A1FE-D70569639B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CCC98D5-8A42-4C97-A1FE-D70569639B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CCC98D5-8A42-4C97-A1FE-D70569639B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F33B9B96-E297-40D6-8630-49EA394B4EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F33B9B96-E297-40D6-8630-49EA394B4EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F33B9B96-E297-40D6-8630-49EA394B4EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F33B9B96-E297-40D6-8630-49EA394B4EAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
