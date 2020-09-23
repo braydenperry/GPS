@@ -1,9 +1,9 @@
-﻿using System;
+﻿using GPS.Data.ParserObjects;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
-using GPS.Data.ParserObjects;
 
 namespace GPS.Data
 {
@@ -43,16 +43,8 @@ namespace GPS.Data
                     Name = historicalOutage.Name,
                     Type = historicalOutage.Type,
                     Reference = historicalOutage.Reference,
-                    StartYear = historicalOutage.StartYear,
-                    StartDayOfYear = historicalOutage.StartDayOfYear,
-                    StartHour = historicalOutage.StartHour,
-                    StartMinute = historicalOutage.StartMinute,
-                    StartSecond = historicalOutage.StartSecond,
-                    EndYear = historicalOutage.EndYear,
-                    EndDayOfYear = historicalOutage.EndDayOfYear,
-                    EndHour = historicalOutage.EndHour,
-                    EndMinute = historicalOutage.EndMinute,
-                    EndSecond = historicalOutage.EndSecond
+                    StartTime = GpsIsFile.ToDateTime(historicalOutage.StartYear, historicalOutage.StartDayOfYear, historicalOutage.StartHour, historicalOutage.StartMinute, historicalOutage.StartSecond),
+                    EndTime = GpsIsFile.ToDateTime(historicalOutage.EndYear, historicalOutage.EndDayOfYear, historicalOutage.EndHour, historicalOutage.EndMinute, historicalOutage.EndSecond)
                 });
             }
 
@@ -68,11 +60,7 @@ namespace GPS.Data
                     Name = currentOutage.Name,
                     Type = currentOutage.Type,
                     Reference = currentOutage.Reference,
-                    StartYear = currentOutage.StartYear,
-                    StartDayOfYear = currentOutage.StartDayOfYear,
-                    StartHour = currentOutage.StartHour,
-                    StartMinute = currentOutage.StartMinute,
-                    StartSecond = currentOutage.StartSecond
+                    StartTime = GpsIsFile.ToDateTime(currentOutage.StartYear, currentOutage.StartDayOfYear, currentOutage.StartHour, currentOutage.StartMinute, currentOutage.StartSecond)
                 });
             }
 
@@ -88,11 +76,7 @@ namespace GPS.Data
                     Name = predictedOutage.Name,
                     Type = predictedOutage.Type,
                     Reference = predictedOutage.Reference,
-                    StartYear = predictedOutage.StartYear,
-                    StartDayOfYear = predictedOutage.StartDayOfYear,
-                    StartHour = predictedOutage.StartHour,
-                    StartMinute = predictedOutage.StartMinute,
-                    StartSecond = predictedOutage.StartSecond
+                    StartTime = GpsIsFile.ToDateTime(predictedOutage.StartYear, predictedOutage.StartDayOfYear, predictedOutage.StartHour, predictedOutage.StartMinute, predictedOutage.StartSecond)
                 });
             }
 
