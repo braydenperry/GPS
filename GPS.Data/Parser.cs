@@ -30,12 +30,6 @@ namespace GPS.Data
                 //Call error page form that Tanner will make :)
                 System.Environment.Exit(1);
             }
-            catch (InvalidCastException)
-            {
-                Console.WriteLine("InvalidCastException");
-                //Call error page form that Tanner will make :)
-                System.Environment.Exit(1);
-            }
         }
 
         /// <summary>
