@@ -18,7 +18,7 @@ namespace GPS.Service.Conrollers
 
         public QueryOutagesController()
         {
-            _parser = new Parser("SOF\\current.sof");
+            _parser = new Parser("SOF\\invalidTest.sof");
             _allOutages = _parser.PopulateObjectsFromSof();
         }
 

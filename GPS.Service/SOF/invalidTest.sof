@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+
+<!--The following tags all have invalid data and can be used as a baseline -->
+<!-- Note that there are two different Historical, Predicted, and Current tags for testing -->
+<!-- Note: These values are hard coded. If the values/order of the tags below change, the tests will fail -->
+
+<!--
+If the attributes are supposed to be numbers, check that
+If the attributes are NOT supposed to be numbers, check that
+Current and predicted should not have an end time. Our object isn't build to even accept them, so no need to check.
+
+DateTime now = DateTime.Now;
+If historical outages have a greater end time than the current time - error
+If historical outages end time is greater than the start time - error
+If current outages have a greater start time than current time - error
+If predicted-->
+
+<GPSISFILE FILEID="SOF" SYSID="GPS" VERSION="2">
+  <CREATION YEAR="NAN" DOY="NAN" HR="NAN" MIN="NAN" SEC="NAN" />
+  <REFERENCE YEAR="NAN" DOY="NAN" HR="NAN" MIN="NAN" SEC="NAN" />
+  <HISTORICAL SVID="NAN" SVN="NAN" NAME="12" TYPE="25" REFERENCE="NAN" START_YEAR="NAN" START_DOY="NAN" START_HR="NAN" START_MIN="NAN" START_SEC="NAN" END_YEAR="NAN" END_DOY="NAN" END_HR="NAN" END_MIN="NAN" END_SEC="NAN" />
+  <CURRENT SVID="NAN" SVN="NAN" NAME="65s6" TYPE="5" REFERENCE="NAN" START_YEAR="NAN" START_DOY="NAN" START_HR="NAN" START_MIN="NAN" START_SEC="NAN" />
+  <PREDICTED SVID="NAN" SVN="NAN" NAME="538f" TYPE="4k5" REFERENCE="NAN" START_YEAR="NAN" START_DOY="NAN" START_HR="NAN" START_MIN="NAN" START_SEC="NAN" />
+ </GPSISFILE>
