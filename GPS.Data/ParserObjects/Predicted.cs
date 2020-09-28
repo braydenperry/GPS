@@ -11,13 +11,13 @@ namespace GPS.Data.ParserObjects
 		/// Reusable identifier for each satellite in identified system
 		/// </summary>
 		[XmlAttribute("SVID")]
-		public int SatelliteVehicleId { get; set; }
+		public string SatelliteVehicleId { get; set; }
 
 		/// <summary>
 		/// Unique sequential number associated with satellite-specific program; assigned by the U.S. Air Force
 		/// </summary>
 		[XmlAttribute("SVN")]
-		public int SatelliteVehicleNumber { get; set; }
+		public string SatelliteVehicleNumber { get; set; }
 
 		/// <summary>
 		/// Alphanumeric indicator of outage source
@@ -29,36 +29,36 @@ namespace GPS.Data.ParserObjects
 		public string Type { get; set; }
 
 		[XmlAttribute("REFERENCE")]
-		public int Reference { get; set; }
+		public string Reference { get; set; }
 
 		/// <summary>
 		/// Year when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_YEAR")]
-		public int StartYear { get; set; }
+		public string StartYear { get; set; }
 
 		/// <summary>
 		/// Day of year (1—365) when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_DOY")]
-		public int StartDayOfYear { get; set; }
+		public string StartDayOfYear { get; set; }
 
 		/// <summary>
 		/// Hour when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_HR")]
-		public int StartHour { get; set; }
+		public string StartHour { get; set; }
 
 		/// <summary>
 		/// Minute when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_MIN")]
-		public int StartMinute { get; set; }
+		public string StartMinute { get; set; }
 
 		/// <summary>
 		/// Second when the outage might begin
 		/// </summary>
 		[XmlAttribute("START_SEC")]
-		public int StartSecond { get; set; }
+		public string StartSecond { get; set; }
 	}
 }

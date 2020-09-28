@@ -11,30 +11,30 @@ namespace GPS.Data.ParserObjects
 		/// Year when the Satellite Outage File was created
 		/// </summary>
 		[XmlAttribute("YEAR")]
-		public int Year { get; set; }
+		public string Year { get; set; }
 
 		/// <summary>
 		/// Day of the year (1—365) when the Satellite Outage File (SOF) was created
 		/// </summary>
 		[XmlAttribute("DOY")]
-		public int DayOfYear { get; set; }
+		public string DayOfYear { get; set; }
 
 		/// <summary>
 		/// Hour when the Satellite Outage File was (SOF) created
 		/// </summary>
 		[XmlAttribute("HR")]
-		public int Hour { get; set; }
+		public string Hour { get; set; }
 
 		/// <summary>
 		/// Minute when the Satellite Outage File (SOF) was created
 		/// </summary>
 		[XmlAttribute("MIN")]
-		public int Minute { get; set; }
+		public string Minute { get; set; }
 
 		/// <summary>
 		/// Second when the Satellite Outage File (SOF) was created
 		/// </summary>
 		[XmlAttribute("SEC")]
-		public int Second { get; set; }
+		public string Second { get; set; }
 	}
 }

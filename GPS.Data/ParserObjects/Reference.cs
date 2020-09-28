@@ -14,30 +14,30 @@ namespace GPS.Data.ParserObjects
 		/// Year up to which the satellite outage data collected
 		/// </summary>
 		[XmlAttribute("YEAR")]
-		public int Year { get; set; }
+		public string Year { get; set; }
 
 		/// <summary>
 		/// Day of the year (1—365) up to which the satellite outage data collected
 		/// </summary>
 		[XmlAttribute("DOY")]
-		public int DayOfYear { get; set; }
+		public string DayOfYear { get; set; }
 
 		/// <summary>
 		/// Hour up to which the satellite outage data collected
 		/// </summary>
 		[XmlAttribute("HR")]
-		public int Hour { get; set; }
+		public string Hour { get; set; }
 
 		/// <summary>
 		/// Minute up to which the satellite outage data collected
 		/// </summary>
 		[XmlAttribute("MIN")]
-		public int Minute { get; set; }
+		public string Minute { get; set; }
 
 		/// <summary>
 		/// Second up to which the satellite outage data collected
 		/// </summary>
 		[XmlAttribute("SEC")]
-		public int Second { get; set; }
+		public string Second { get; set; }
 	}
 }

@@ -13,12 +13,23 @@ namespace GPS.Data
 
         public GpsIsFile Outages { get; set; }
 
+        Validate validateObj = new Validate();
+
         public Parser(string filePath)
         {
-            //Serializes the .sof and populates each of the classes
-            Serializer = new XmlSerializer(typeof(GpsIsFile));
-            using Stream reader = new FileStream(filePath, FileMode.Open);
-            Outages = (GpsIsFile)Serializer.Deserialize(reader);
+            try
+            {
+                //Serializes the .sof and populates each of the classes
+                Serializer = new XmlSerializer(typeof(GpsIsFile));
+                using Stream reader = new FileStream(filePath, FileMode.Open);
+                Outages = (GpsIsFile)Serializer.Deserialize(reader);
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("FileNotFoundException");
+                //Call error page form that Tanner will make :)
+                System.Environment.Exit(1);
+            }
         }
 
         /// <summary>
@@ -33,7 +44,10 @@ namespace GPS.Data
             List<Outage> allOutages = new List<Outage>();
             foreach (Historical historicalOutage in Outages.HistoricalOutages)
             {
-                //Add validation here!
+                bool valid = validateObj.ValidateHistorical(historicalOutage);
+                if (!valid)
+                    continue;
+                    //TODO: This is where the error log message will go once we figure out what that's all about.
 
                 allOutages.Add(new Outage
                 {
@@ -50,7 +64,10 @@ namespace GPS.Data
 
             foreach (Current currentOutage in Outages.CurrentOutages)
             {
-                //Add validation here!
+                bool valid = validateObj.ValidateCurrent(currentOutage);
+                if (!valid)
+                    continue;
+                    //TODO: This is where the error log message will go once we figure out what that's all about.
 
                 allOutages.Add(new Outage
                 {
@@ -66,7 +83,10 @@ namespace GPS.Data
 
             foreach (Predicted predictedOutage in Outages.PredictedOutages)
             {
-                //Add validation here!
+                bool valid = validateObj.ValidatePredicted(predictedOutage);
+                if (!valid)
+                    continue;
+                    //TODO: This is where the error log message will go once we figure out what that's all about.
 
                 allOutages.Add(new Outage
                 {
