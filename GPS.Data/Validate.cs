@@ -37,6 +37,8 @@ namespace GPS.Data
             }
             //If historical outages have a greater end time than the current time - error
             //If historical outages end time is greater than the start time - error
+
+            //If all tests pass, return true
             return true;
         }
 
@@ -61,6 +63,8 @@ namespace GPS.Data
             {
                 return false;
             }
+
+            //If all tests pass, return true
             return true;
         }
 
