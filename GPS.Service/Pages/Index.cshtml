@@ -4,61 +4,55 @@
     ViewData["Title"] = "Home page";
 }
 
-@*<ul>
-    @foreach (var outage in Model.allOutages)
-    {
-        <li>@outage.StartYear</li>
-    }
-</ul>*@
-
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    @*The css files I try to store locally do not seem to by linking properly. I deleted the my added 'CSS' directory I was previously trying to access*@
+
+    @*<link rel="stylesheet" href="~/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
 </head>
-<body>
 
+<body>
     <div class="container mb-3 mt-3">
-        <table class="table table-striped table-bordered" style="width: 100%" id="mydatatable">
+        <table class="table table-striped table-bordered mydatatable" style="width: 100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
+                    <th>Vehicle ID</th>
+                    <th>Number</th>
                     <th>Start Date</th>
-                    <th>Salary</th>
+                    <th>End Date</th>
+                    <th>Type</th>
+                    <th>Reference</th>
                 </tr>
             </thead>
             <tbody>
-                
+
 
                 @foreach (var outage in Model.allOutages)
                 {
-                <tr>
-                    <td>@outage.StartYear</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
+                    <tr>
+                        <td>@outage.SatelliteVehicleId </td>
+                        <td>@outage.SatelliteVehicleNumber</td>
+                        <td>@outage.StartYear/@outage.StartDayOfYear</td>
+                        <td>@outage.EndYear/@outage.EndDayOfYear</td>
+                        <td>@outage.Type</td>
+                        <td>@outage.Reference</td>
+                    </tr>
                 }
 
-
-
-            
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
+                    <th>Vehicle ID</th>
+                    <th>Number</th>
                     <th>Start Date</th>
-                    <th>Salary</th>
+                    <th>End Date</th>
+                    <th>Type</th>
+                    <th>Reference</th>
                 </tr>
             </tfoot>
+
         </table>
     </div>
 
@@ -69,6 +63,23 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script>
-        $('#mydatatable').DataTable();
+        var table = $('.mydatatable').DataTable({
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
+            //searching: false
+        });
+
+        $('.mydatatable tfoot th').each(function () {
+            var title = $(this).text();
+            $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+        });
+
+        table.columns().every(function () {
+            var that = this;
+            $('input', this.footer()).on('keyup change', function () {
+                if (that.search() !== this.value) {
+                    that.search(this.value).draw();
+                }
+            })
+        })
     </script>
 </body>
