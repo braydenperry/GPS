@@ -57,8 +57,8 @@ namespace GPS.Data
                     Name = historicalOutage.Name,
                     Type = historicalOutage.Type,
                     Reference = historicalOutage.Reference,
-                    StartTime = GpsIsFile.ToDateTime(historicalOutage.StartYear, historicalOutage.StartDayOfYear, historicalOutage.StartHour, historicalOutage.StartMinute, historicalOutage.StartSecond),
-                    EndTime = GpsIsFile.ToDateTime(historicalOutage.EndYear, historicalOutage.EndDayOfYear, historicalOutage.EndHour, historicalOutage.EndMinute, historicalOutage.EndSecond)
+                    StartTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.StartYear), int.Parse(historicalOutage.StartDayOfYear),int.Parse(historicalOutage.StartHour), int.Parse(historicalOutage.StartMinute), int.Parse(historicalOutage.StartSecond)),
+                    EndTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.EndYear), int.Parse(historicalOutage.EndDayOfYear), int.Parse(historicalOutage.EndHour), int.Parse(historicalOutage.EndMinute), int.Parse(historicalOutage.EndSecond))
                 });
             }
 
@@ -77,7 +77,7 @@ namespace GPS.Data
                     Name = currentOutage.Name,
                     Type = currentOutage.Type,
                     Reference = currentOutage.Reference,
-                    StartTime = GpsIsFile.ToDateTime(currentOutage.StartYear, currentOutage.StartDayOfYear, currentOutage.StartHour, currentOutage.StartMinute, currentOutage.StartSecond)
+                    StartTime = GpsIsFile.ToDateTime(int.Parse(currentOutage.StartYear), int.Parse(currentOutage.StartDayOfYear), int.Parse(currentOutage.StartHour), int.Parse(currentOutage.StartMinute), int.Parse(currentOutage.StartSecond))
                 });
             }
 
@@ -96,7 +96,7 @@ namespace GPS.Data
                     Name = predictedOutage.Name,
                     Type = predictedOutage.Type,
                     Reference = predictedOutage.Reference,
-                    StartTime = GpsIsFile.ToDateTime(predictedOutage.StartYear, predictedOutage.StartDayOfYear, predictedOutage.StartHour, predictedOutage.StartMinute, predictedOutage.StartSecond)
+                    StartTime = GpsIsFile.ToDateTime(int.Parse(predictedOutage.StartYear), int.Parse(predictedOutage.StartDayOfYear), int.Parse(predictedOutage.StartHour), int.Parse(predictedOutage.StartMinute), int.Parse(predictedOutage.StartSecond))
                 });
             }
 

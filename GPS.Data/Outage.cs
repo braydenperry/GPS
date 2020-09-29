@@ -15,8 +15,10 @@ namespace GPS.Data
 		[XmlAttribute("SVN")]
 		public string SatelliteVehicleNumber { get; set; }
 
+		[XmlAttribute("NAME")]
 		public string Name { get; set; }
-
+		
+		[XmlAttribute("REFERENCE")]
 		public string Type { get; set; }
 
 		[XmlAttribute("REFERENCE")]

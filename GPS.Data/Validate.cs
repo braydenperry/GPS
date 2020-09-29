@@ -8,6 +8,7 @@ namespace GPS.Data
 {
     public class Validate
     {
+        DateTime CurrentTime { get; set; }
         public bool ValidateHistorical(Historical outage)
         {
             //If they are supposed to be numbers, check that
@@ -35,9 +36,12 @@ namespace GPS.Data
                 //TODO: Log error
                 return false;
             }
-            //If historical outages have a greater end time than the current time - error
-            //If historical outages end time is greater than the start time - error
-
+            //Validate that historical outage end time is not greater than historical outage start time
+            //or greater than current time
+            if (outage.EndTime > CurrentTime || outage.EndTime > outage.StartTime)
+			{
+                return false;
+			}
             //If all tests pass, return true
             return true;
         }
