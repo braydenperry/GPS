@@ -38,10 +38,7 @@ namespace GPS.Data
             }
             //Validate that historical outage end time is not greater than historical outage start time
             //or greater than current time
-            if (outage.EndTime > CurrentTime || outage.EndTime > outage.StartTime)
-			{
-                return false;
-			}
+            
             //If all tests pass, return true
             return true;
         }

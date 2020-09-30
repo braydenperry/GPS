@@ -91,17 +91,5 @@ namespace GPS.Data.ParserObjects
 		/// </summary>
 		[XmlAttribute("END_SEC")]
 		public string EndSecond { get; set; }
-
-		/// <summary>
-		/// Time when outage starts. Combines year, DOY, hour, min, sec
-		/// </summary>
-		[XmlAttribute("START_TIME")]
-		public DateTime StartTime { get; set; }
-
-		/// <summary>
-		/// Time when outage ends. Combines year, DOY, hour, min, sec
-		/// </summary>
-		[XmlAttribute("END_TIME")]
-		public DateTime EndTime { get; set; }
 	}
 }
