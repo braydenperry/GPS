@@ -4,7 +4,48 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mb-3 mt-3">
+    <table class="table table-striped table-bordered mydatatable" style="width: 100%">
+        <thead>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Type</th>
+                <th>Reference</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var outage in Model.allOutages)
+            {
+                <tr>
+                    <td>@outage.SatelliteVehicleId </td>
+                    <td>@outage.SatelliteVehicleNumber</td>
+                    <td>@outage.StartYear/@outage.StartDayOfYear</td>
+                    <td>@outage.EndYear/@outage.EndDayOfYear</td>
+                    <td>@outage.Type</td>
+                    <td>@outage.Reference</td>
+                </tr>
+            }
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Vehicle ID</th>
+                <th>Number</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Type</th>
+                <th>Reference</th>
+            </tr>
+        </tfoot>
+
+    </table>
 </div>
+
+@section Scripts {
+    <script src="~/js/data-table.js"></script>
+}
