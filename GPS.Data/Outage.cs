@@ -27,6 +27,7 @@ namespace GPS.Data
 
 		public DateTime StartTime { get; set; }
 
+		//EndTime needs to be a nullable value bc predicted sometimes includes it and sometimes doesn't
 		public DateTime EndTime { get; set; }
 	}
 }

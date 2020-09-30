@@ -9,29 +9,28 @@ using GPS.Data;
 
 namespace GPS.WebApp.Pages
 {
-    public class IndexModel : PageModel
-    {
-        private readonly ILogger<IndexModel> _logger;
+	public class IndexModel : PageModel
+	{
+		private readonly ILogger<IndexModel> _logger;
 
-        public readonly Parser sofParser;
-        public List<Outage> allOutages;
+		public readonly Parser sofParser;
+		public List<Outage> allOutages;
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            sofParser = new Parser("SOF\\invalidTest.sof");
-            allOutages = sofParser.PopulateObjectsFromSof();
-            _logger = logger;
-        }
+		public IndexModel(ILogger<IndexModel> logger)
+		{
+			sofParser = new Parser("SOF\\validTest.sof");
+			allOutages = sofParser.PopulateObjectsFromSof();
+			_logger = logger;
+		}
 
-        public void OnGet()
-        {
-            // foreach (var outages in
-            // from Outage outages in allOutages
-            // where outages.StartYear == 2020
-            // select outages)
-            // {
-            //     Console.WriteLine(outages.StartYear);
-            // }
-        }
-    }
+		public void OnGet()
+		{
+			foreach (var outages in
+			from Outage outages in allOutages
+			select outages)
+			{
+				Console.WriteLine(outages.SatelliteVehicleId);
+			}
+		}
+	}
 }
