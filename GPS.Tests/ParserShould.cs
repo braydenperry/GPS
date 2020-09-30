@@ -186,11 +186,11 @@ namespace GPS.Test
         public void CheckSecondPredictedTag()
         {
             Assert.Equal("PREDICTED", _allOutages[5].TagName);
-            Assert.Equal("18", _allOutages[5].SatelliteVehicleId);
-            Assert.Equal("34", _allOutages[5].SatelliteVehicleNumber);
+            Assert.Equal("25", _allOutages[5].SatelliteVehicleId);
+            Assert.Equal("62", _allOutages[5].SatelliteVehicleNumber);
             Assert.Equal("NANU", _allOutages[5].Name);
-            Assert.Equal("FCSTUUFN", _allOutages[5].Type);
-            Assert.Equal("2019156", _allOutages[5].Reference);
+            Assert.Equal("FCSTMX", _allOutages[5].Type);
+            Assert.Equal("2020045", _allOutages[5].Reference);
 
             //add test for startTIme
             //Assert.Equal("2019", _allOutages[5].StartYear);
