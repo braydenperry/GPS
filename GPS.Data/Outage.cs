@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
+using GPS.Data.ParserObjects;
 
 namespace GPS.Data
 {
@@ -17,8 +18,8 @@ namespace GPS.Data
 
 		[XmlAttribute("NAME")]
 		public string Name { get; set; }
-		
-		[XmlAttribute("REFERENCE")]
+
+		[XmlAttribute("TYPE")]
 		public string Type { get; set; }
 
 		[XmlAttribute("REFERENCE")]
