@@ -1,4 +1,5 @@
 ﻿using GPS.Data;
+using GPS.Data.ParserObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,18 +91,12 @@ namespace GPS.Test
             Assert.Equal("UNUSABLE", _allOutages[0].Type);
             Assert.Equal("1998006", _allOutages[0].Reference);
 
-            //add test for startTIme
-            //add test for endTime
-            //Assert.Equal("1998", _allOutages[0].StartYear);
-            //Assert.Equal("009", _allOutages[0].StartDayOfYear);
-            //Assert.Equal("09", _allOutages[0].StartHour);
-            //Assert.Equal("55", _allOutages[0].StartMinute);
-            //Assert.Equal("00", _allOutages[0].StartSecond);
-            //Assert.Equal("1998", _allOutages[0].EndYear);
-            //Assert.Equal("009", _allOutages[0].EndDayOfYear);
-            //Assert.Equal("22", _allOutages[0].EndHour);
-            //Assert.Equal("56", _allOutages[0].EndMinute);
-            //Assert.Equal("00", _allOutages[0].EndSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(1998, 009, 09, 55, 00);
+            Assert.Equal(startTime, _allOutages[0].StartTime);
+            //Test for endTime
+            DateTime endTime = GpsIsFile.ToDateTime(1998, 009, 22, 56, 00);
+            Assert.Equal(endTime, _allOutages[0].EndTime);
         }
 
         [Fact]
@@ -114,18 +109,12 @@ namespace GPS.Test
             Assert.Equal("FCSTSUMM", _allOutages[1].Type);
             Assert.Equal("1998014", _allOutages[1].Reference);
 
-            //add test for startTIme
-            //add test for endTime
-            //Assert.Equal("1998", _allOutages[1].StartYear);
-            //Assert.Equal("021", _allOutages[1].StartDayOfYear);
-            //Assert.Equal("01", _allOutages[1].StartHour);
-            //Assert.Equal("27", _allOutages[1].StartMinute);
-            //Assert.Equal("00", _allOutages[1].StartSecond);
-            //Assert.Equal("1998", _allOutages[1].EndYear);
-            //Assert.Equal("021", _allOutages[1].EndDayOfYear);
-            //Assert.Equal("03", _allOutages[1].EndHour);
-            //Assert.Equal("42", _allOutages[1].EndMinute);
-            //Assert.Equal("00", _allOutages[1].EndSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(1998, 021, 01, 27, 00);
+            Assert.Equal(startTime, _allOutages[1].StartTime);
+            //Test for endTime
+            DateTime endTime = GpsIsFile.ToDateTime(1998, 021, 03, 42, 00);
+            Assert.Equal(endTime, _allOutages[1].EndTime);
         }
 
         [Fact]
@@ -138,12 +127,9 @@ namespace GPS.Test
             Assert.Equal("FCSTUUFN", _allOutages[2].Type);
             Assert.Equal("2020031", _allOutages[2].Reference);
 
-            //add test for startTIme
-            //Assert.Equal("2020", _allOutages[2].StartYear);
-            //Assert.Equal("191", _allOutages[2].StartDayOfYear);
-            //Assert.Equal("18", _allOutages[2].StartHour);
-            //Assert.Equal("00", _allOutages[2].StartMinute);
-            //Assert.Equal("00", _allOutages[2].StartSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(2020, 191, 18, 00, 00);
+            Assert.Equal(startTime, _allOutages[2].StartTime);
         }
 
         [Fact]
@@ -156,12 +142,9 @@ namespace GPS.Test
             Assert.Equal("UNUSUFN", _allOutages[3].Type);
             Assert.Equal("2020033", _allOutages[3].Reference);
 
-            //add test for startTIme
-            //Assert.Equal("2020", _allOutages[3].StartYear);
-            //Assert.Equal("182", _allOutages[3].StartDayOfYear);
-            //Assert.Equal("20", _allOutages[3].StartHour);
-            //Assert.Equal("10", _allOutages[3].StartMinute);
-            //Assert.Equal("00", _allOutages[3].StartSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(2020, 182, 20, 10, 00);
+            Assert.Equal(startTime, _allOutages[3].StartTime);
         }
 
         [Fact]
@@ -174,12 +157,9 @@ namespace GPS.Test
             Assert.Equal("FCSTUUFN", _allOutages[4].Type);
             Assert.Equal("2020010", _allOutages[4].Reference);
 
-            //add test for startTIme
-            //Assert.Equal("2020", _allOutages[4].StartYear);
-            //Assert.Equal("069", _allOutages[4].StartDayOfYear);
-            //Assert.Equal("15", _allOutages[4].StartHour);
-            //Assert.Equal("30", _allOutages[4].StartMinute);
-            //Assert.Equal("00", _allOutages[4].StartSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(2020, 069, 15, 30, 00);
+            Assert.Equal(startTime, _allOutages[4].StartTime);
         }
 
         [Fact]
@@ -192,12 +172,12 @@ namespace GPS.Test
             Assert.Equal("FCSTMX", _allOutages[5].Type);
             Assert.Equal("2020045", _allOutages[5].Reference);
 
-            //add test for startTIme
-            //Assert.Equal("2019", _allOutages[5].StartYear);
-            //Assert.Equal("280", _allOutages[5].StartDayOfYear);
-            //Assert.Equal("20", _allOutages[5].StartHour);
-            //Assert.Equal("00", _allOutages[5].StartMinute);
-            //Assert.Equal("00", _allOutages[5].StartSecond);
+            //Test for startTIme
+            DateTime startTime = GpsIsFile.ToDateTime(2020, 275, 19, 00, 00);
+            Assert.Equal(startTime, _allOutages[5].StartTime);
+            //Test for endTime
+            DateTime endTime = GpsIsFile.ToDateTime(2020, 277, 19, 00, 00);
+            Assert.Equal(endTime, _allOutages[5].EndTime);
         }
     }
 }
