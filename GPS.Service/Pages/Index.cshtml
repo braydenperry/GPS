@@ -20,7 +20,7 @@
             </thead>
             <tbody>
 
-                @foreach (var outage in Model.allOutages)
+                @foreach (var outage in Model.allOutages)       //Ask Hanna how this Model.allOutages element is supposed to work.
                 {
                     <tr>
                         <td>@outage.TagName</td>
@@ -34,8 +34,10 @@
                 }
 
             </tbody>
+
             <tfoot>
                 <tr>
+                    <th>Tag Name</th>
                     <th>Vehicle ID</th>
                     <th>Number</th>
                     <th>Start Date</th>
