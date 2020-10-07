@@ -1,0 +1,13 @@
+﻿@page
+@model GPS.Service.ButtonsModel
+@{
+    ViewData["Title"] = "Buttons";
+}
+
+<h1>Buttons</h1>
+
+<form method="post" enctype="multipart/form-data" action="api/ManageOutages">
+    <input type="file" name="file" />
+    <input type="submit" value="submit" />
+</form>
+
