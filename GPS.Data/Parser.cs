@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -13,6 +14,15 @@ namespace GPS.Data
 
 		public GpsIsFile Outages { get; set; }
 
+		private readonly List<string> _errorLog = new List<string>();
+		/// <summary>
+		/// A list of strings containing all the errors that arise from the validation of the .sof file.
+		/// </summary>
+		public List<string> ErrorLog { get { return _errorLog; } }
+
+		/// <summary>
+		/// object in reference to Validate.cs
+		/// </summary>
 		Validate validateObj = new Validate();
 
 		public Parser(string filePath)
@@ -27,7 +37,7 @@ namespace GPS.Data
 			catch (FileNotFoundException)
 			{
 				Console.WriteLine("FileNotFoundException");
-				//Call error page form that Tanner will make :)
+				//TODO: navigate to an error page if this is the case
 				System.Environment.Exit(1);
 			}
 		}
@@ -46,8 +56,14 @@ namespace GPS.Data
 			{
 				bool valid = validateObj.ValidateHistorical(historicalOutage);
 				if (!valid)
+                {
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
+				}
+					
 				//TODO: This is where the error log message will go once we figure out what that's all about.
+				
 
 				allOutages.Add(new Outage
 				{
@@ -66,8 +82,11 @@ namespace GPS.Data
 			{
 				bool valid = validateObj.ValidateCurrent(currentOutage);
 				if (!valid)
+				{
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Curret tag with the reference number " + currentOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
-				//TODO: This is where the error log message will go once we figure out what that's all about.
+				}
 
 				allOutages.Add(new Outage
 				{
@@ -86,8 +105,11 @@ namespace GPS.Data
 				int valid = validateObj.ValidatePredicted(predictedOutage);
 				//if invalid
 				if (valid == 3)
+				{
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Predicted tag with the reference number " + predictedOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
-				//TODO: This is where the error log message will go once we figure out what that's all about.
+				}
 
 				//if end time exists
 				if (valid == 1)
@@ -118,6 +140,11 @@ namespace GPS.Data
 						StartTime = GpsIsFile.ToDateTime(int.Parse(predictedOutage.StartYear), int.Parse(predictedOutage.StartDayOfYear), int.Parse(predictedOutage.StartHour), int.Parse(predictedOutage.StartMinute), int.Parse(predictedOutage.StartSecond)),
 					});
 				}
+			}
+
+			if (_errorLog == null)
+			{
+				_errorLog.Add("There were no errors with the current.sof file");
 			}
 			return allOutages;
 		}
