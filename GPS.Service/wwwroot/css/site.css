@@ -60,7 +60,8 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  /*Adding '!important' forces this assignment to override any other margin-bottom assignments*/
+  margin-bottom: 60px !important;
 }
 .footer {
   position: absolute;
@@ -68,4 +69,9 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/*Changing the max-width fixed the problem of the table not centering. The table footer 'search' cells were too big for the container*/
+.mydatatable tfoot input{
+    max-width: 125px;
 }

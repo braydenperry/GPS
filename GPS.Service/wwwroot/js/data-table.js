@@ -5,7 +5,7 @@
 
 $('.mydatatable tfoot th').each(function () {
     var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    $(this).html('<input type="text" placeholder="Search" />');
 });
 
 table.columns().every(function () {
