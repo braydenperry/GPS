@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using GPS.Data;
@@ -18,7 +16,7 @@ namespace GPS.WebApp.Pages
 
 		public IndexModel(ILogger<IndexModel> logger)
 		{
-			sofParser = new Parser("SOF\\validTest.sof");
+			sofParser = new Parser("SOF\\current.sof");
 			allOutages = sofParser.PopulateObjectsFromSof();
 			_logger = logger;
 		}

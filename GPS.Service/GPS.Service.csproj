@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\SOFDownload.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Pages\SOFDownload.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\GPS.Tests\GPS.Tests.csproj" />
   </ItemGroup>
 
