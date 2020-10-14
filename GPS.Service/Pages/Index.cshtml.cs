@@ -18,7 +18,7 @@ namespace GPS.WebApp.Pages
 
 		public IndexModel(ILogger<IndexModel> logger)
 		{
-			sofParser = new Parser("SOF\\validTest.sof");
+			sofParser = new Parser("SOF\\current.sof");
 			allOutages = sofParser.PopulateObjectsFromSof();
 			_logger = logger;
 		}

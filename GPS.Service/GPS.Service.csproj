@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GPS.Tests\GPS.Tests.csproj" />
+    <ProjectReference Include="..\GPS.Data\GPS.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
