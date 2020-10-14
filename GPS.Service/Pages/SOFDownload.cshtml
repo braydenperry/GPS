@@ -1,11 +1,10 @@
-@page
-@model IndexModel
+﻿@page
+@model SOFDownloadModel
 @{
-	
+	ViewData["Title"] = "SOF File Download";
 }
 
-
-<a href="~/SOF/SOFDownloadFile.sof" download="SOFOutages.sof">Download SOF File</a>
+<a href="~/SOF/SOFDownloadFile.sof" download="CurrentSOF.sof">Download SOF File</a>
 
 @section Scripts {
 	<script src="~/js/data-table.js"></script>

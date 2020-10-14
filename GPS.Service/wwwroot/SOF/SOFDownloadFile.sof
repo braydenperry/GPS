@@ -1,6 +1,3 @@
-﻿This file is used only for downloading purposes. 
-Needs to be updated everytime there is a new SOF file.
-
 <?xml version="1.0" standalone="no"?>
 <GPSISFILE FILEID="SOF" SYSID="GPS" VERSION="2">
   <CREATION YEAR="2020" DOY="234" HR="11" MIN="53" SEC="22" />
