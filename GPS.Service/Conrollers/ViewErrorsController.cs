@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using GPS.Data;
 using Microsoft.AspNetCore.Http;
@@ -15,21 +16,26 @@ namespace GPS.Service.Conrollers
     {
         private readonly Parser _parser;
         private readonly List<string> _allErrors;
+        private readonly string retVal;
 
         public ViewErrorsController()
         {
             _parser = new Parser("SOF\\current.sof");
+            _parser.PopulateObjectsFromSof();
             _allErrors = _parser.ErrorLog;
-            var tags = new { tags = _allErrors };
 
-            Console.WriteLine(JsonConvert.SerializeObject(tags));
+            foreach (var error in _allErrors)
+            {
+                retVal += error + "\n";
+            }
+
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public string Get()
         {
             //TODO: Get this line of code working.
-            return (IActionResult)_allErrors;
+            return retVal;
         }
     }
 }

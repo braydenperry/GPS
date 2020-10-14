@@ -142,7 +142,7 @@ namespace GPS.Data
 				}
 			}
 
-			if (_errorLog == null)
+			if (_errorLog.Count == 0)
 			{
 				_errorLog.Add("There were no errors with the current.sof file");
 			}
