@@ -27,7 +27,6 @@ namespace GPS.Data
 				&& isNumeric(outage.EndSecond)
 				))
 			{
-				//TODO: Log error
 				return false;
 			}
 
@@ -38,7 +37,6 @@ namespace GPS.Data
 			//Validate name and type are NOT numbers
 			if (outage.Name.Any(char.IsDigit) || outage.Type.Any(char.IsDigit))
 			{
-				//TODO: Log error
 				return false;
 			}
 
@@ -83,7 +81,6 @@ namespace GPS.Data
 					&& isNumeric(outage.EndSecond)
 					))
 				{
-					//TODO: Log error
 					return 3;
 				}
 				//create start and end time varibles for Predicted outage
@@ -110,7 +107,6 @@ namespace GPS.Data
 					&& isNumeric(outage.StartSecond)
 					))
 				{
-					//TODO: Log error
 					return 3;
 				}
 			}
@@ -145,7 +141,6 @@ namespace GPS.Data
 				&& isNumeric(outage.StartSecond)
 				))
 			{
-				//TODO: Log error
 				return false;
 			}
 
