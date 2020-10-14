@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\SOFDownload.cshtml" />
+    <Content Remove="wwwroot\SOF\SOFDownloadFile.sof" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\SOF\" />
+    <TypeScriptCompile Include="wwwroot\SOF\SOFDownloadFile.sof" />
   </ItemGroup>
 
 </Project>
