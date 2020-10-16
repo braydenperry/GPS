@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GPS.Data\GPS.Data.csproj" />
+    <Content Remove="wwwroot\SOF\SOFDownloadFile.sof" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GPS.Tests\GPS.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\SOF\" />
+    <None Include="wwwroot\SOF\SOFDownloadFile.sof">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="row justify-content-center">
@@ -18,8 +18,8 @@
                     <th>Reference</th>
                 </tr>
             </thead>
-            <tbody>
 
+            <tbody>
                 @foreach (var outage in Model.allOutages)       //Ask Hanna how this Model.allOutages element is supposed to work.
                 {
                     <tr>
@@ -32,7 +32,6 @@
                         <td>@outage.Reference</td>
                     </tr>
                 }
-
             </tbody>
 
             <tfoot>
@@ -51,5 +50,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/data-table.js"></script>
+	<script src="~/js/data-table.js"></script>
 }
