@@ -58,8 +58,9 @@ html {
   min-height: 100%;
 }
 
-/* Margin bottom by footer height */
 body {
+  /* Margin bottom by footer height */
+  /*Adding '!important' forces this assignment to override any other margin-bottom assignments*/
   margin-bottom: 60px !important;
 }
 

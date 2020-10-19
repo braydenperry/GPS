@@ -20,19 +20,27 @@ namespace GPS.Data
 		/// </summary>
 		public List<string> ErrorLog { get { return _errorLog; } }
 
+        /// <summary>
+        /// object in reference to Validate.cs
+        /// </summary>
+        readonly Validate ValidateObj = new Validate();
 		/// <summary>
-		/// object in reference to Validate.cs
+		/// Object Created to coordinate with the lock
 		/// </summary>
-		Validate validateObj = new Validate();
+		private readonly object SerializeLock = new object();
 
 		public Parser(string filePath)
 		{
 			try
 			{
-				//Serializes the .sof and populates each of the classes
-				Serializer = new XmlSerializer(typeof(GpsIsFile));
-				using Stream reader = new FileStream(filePath, FileMode.Open);
-				Outages = (GpsIsFile)Serializer.Deserialize(reader);
+				//Thread protection for whatever file is passed into the serializer
+				lock (SerializeLock)
+                {
+					//Serializes the .sof and populates each of the classes
+					Serializer = new XmlSerializer(typeof(GpsIsFile));
+					using Stream reader = new FileStream(filePath, FileMode.Open);
+					Outages = (GpsIsFile)Serializer.Deserialize(reader);
+				}
 			}
 			catch (FileNotFoundException)
 			{
@@ -54,7 +62,7 @@ namespace GPS.Data
 			List<Outage> allOutages = new List<Outage>();
 			foreach (Historical historicalOutage in Outages.HistoricalOutages)
 			{
-				bool valid = validateObj.ValidateHistorical(historicalOutage);
+				bool valid = ValidateObj.ValidateHistorical(historicalOutage);
 				if (!valid)
                 {
 					//If there is an error, log it and continue with the next iteration of the loop
@@ -80,7 +88,7 @@ namespace GPS.Data
 
 			foreach (Current currentOutage in Outages.CurrentOutages)
 			{
-				bool valid = validateObj.ValidateCurrent(currentOutage);
+				bool valid = ValidateObj.ValidateCurrent(currentOutage);
 				if (!valid)
 				{
 					//If there is an error, log it and continue with the next iteration of the loop
@@ -102,7 +110,7 @@ namespace GPS.Data
 
 			foreach (Predicted predictedOutage in Outages.PredictedOutages)
 			{
-				int valid = validateObj.ValidatePredicted(predictedOutage);
+				int valid = ValidateObj.ValidatePredicted(predictedOutage);
 				//if invalid
 				if (valid == 3)
 				{
