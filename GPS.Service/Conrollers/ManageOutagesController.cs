@@ -26,14 +26,14 @@ namespace GPS.Service.Conrollers
         }
         
         [HttpPost]
-        public async Task<string> Post([FromForm] FileUpload fileUpload)
+        public async Task<string> Post([FromForm] FileUpload file)
         {
             try
             {
-                if (fileUpload.File.Length > 0) // Make sure there's actually a file
+                if (file.File.Length > 0) // Make sure there's actually a file
                 {
-                    using FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\SOF\\" + fileUpload.File.FileName);
-                    await fileUpload.File.CopyToAsync(fileStream);
+                    using FileStream fileStream = System.IO.File.Create(_environment.WebRootPath + "\\SOF\\" + file.File.FileName);
+                    await file.File.CopyToAsync(fileStream);
                     fileStream.Flush();
                     return "File uploaded.";
                 }
