@@ -3,11 +3,13 @@
     //searching: false
 });
 
+//searching box
 $('.mydatatable tfoot th').each(function () {
     var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+    $(this).html('<input type="text" placeholder="Search" />');
 });
 
+//search functionality
 table.columns().every(function () {
     var that = this;
     $('input', this.footer()).on('keyup change', function () {

@@ -48,5 +48,32 @@ namespace GPS.Service.Conrollers
             }
         }
 
+        [HttpDelete]
+        public string Delete()
+        {
+
+            try
+            {
+
+                var sofPath = _environment.WebRootPath + "\\SOF\\current.sof";
+
+                if (System.IO.File.Exists(sofPath))
+                {
+                    System.IO.File.Delete(sofPath);
+                }
+                else
+                {
+                    return "SOF file does not exist.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message.ToString();
+            }
+
+            return "Delete successful";
+
+        }
     }
 }

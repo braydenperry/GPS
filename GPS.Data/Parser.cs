@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -13,21 +14,38 @@ namespace GPS.Data
 
 		public GpsIsFile Outages { get; set; }
 
-		Validate validateObj = new Validate();
+		private readonly List<string> _errorLog = new List<string>();
+		/// <summary>
+		/// A list of strings containing all the errors that arise from the validation of the .sof file.
+		/// </summary>
+		public List<string> ErrorLog { get { return _errorLog; } }
+
+        /// <summary>
+        /// object in reference to Validate.cs
+        /// </summary>
+        readonly Validate ValidateObj = new Validate();
+		/// <summary>
+		/// Object Created to coordinate with the lock
+		/// </summary>
+		private readonly object SerializeLock = new object();
 
 		public Parser(string filePath)
 		{
 			try
 			{
-				//Serializes the .sof and populates each of the classes
-				Serializer = new XmlSerializer(typeof(GpsIsFile));
-				using Stream reader = new FileStream(filePath, FileMode.Open);
-				Outages = (GpsIsFile)Serializer.Deserialize(reader);
+				//Thread protection for whatever file is passed into the serializer
+				lock (SerializeLock)
+                {
+					//Serializes the .sof and populates each of the classes
+					Serializer = new XmlSerializer(typeof(GpsIsFile));
+					using Stream reader = new FileStream(filePath, FileMode.Open);
+					Outages = (GpsIsFile)Serializer.Deserialize(reader);
+				}
 			}
 			catch (FileNotFoundException)
 			{
 				Console.WriteLine("FileNotFoundException");
-				//Call error page form that Tanner will make :)
+				//TODO: navigate to an error page if this is the case
 				System.Environment.Exit(1);
 			}
 		}
@@ -44,10 +62,16 @@ namespace GPS.Data
 			List<Outage> allOutages = new List<Outage>();
 			foreach (Historical historicalOutage in Outages.HistoricalOutages)
 			{
-				bool valid = validateObj.ValidateHistorical(historicalOutage);
+				bool valid = ValidateObj.ValidateHistorical(historicalOutage);
 				if (!valid)
+                {
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
+				}
+					
 				//TODO: This is where the error log message will go once we figure out what that's all about.
+				
 
 				allOutages.Add(new Outage
 				{
@@ -64,10 +88,13 @@ namespace GPS.Data
 
 			foreach (Current currentOutage in Outages.CurrentOutages)
 			{
-				bool valid = validateObj.ValidateCurrent(currentOutage);
+				bool valid = ValidateObj.ValidateCurrent(currentOutage);
 				if (!valid)
+				{
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Curret tag with the reference number " + currentOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
-				//TODO: This is where the error log message will go once we figure out what that's all about.
+				}
 
 				allOutages.Add(new Outage
 				{
@@ -83,11 +110,14 @@ namespace GPS.Data
 
 			foreach (Predicted predictedOutage in Outages.PredictedOutages)
 			{
-				int valid = validateObj.ValidatePredicted(predictedOutage);
+				int valid = ValidateObj.ValidatePredicted(predictedOutage);
 				//if invalid
 				if (valid == 3)
+				{
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Predicted tag with the reference number " + predictedOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
-				//TODO: This is where the error log message will go once we figure out what that's all about.
+				}
 
 				//if end time exists
 				if (valid == 1)
@@ -118,6 +148,11 @@ namespace GPS.Data
 						StartTime = GpsIsFile.ToDateTime(int.Parse(predictedOutage.StartYear), int.Parse(predictedOutage.StartDayOfYear), int.Parse(predictedOutage.StartHour), int.Parse(predictedOutage.StartMinute), int.Parse(predictedOutage.StartSecond)),
 					});
 				}
+			}
+
+			if (_errorLog.Count == 0)
+			{
+				_errorLog.Add("There were no errors with the current.sof file");
 			}
 			return allOutages;
 		}
