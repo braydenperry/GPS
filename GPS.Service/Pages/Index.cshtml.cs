@@ -20,15 +20,5 @@ namespace GPS.WebApp.Pages
 			allOutages = sofParser.PopulateObjectsFromSof();
 			_logger = logger;
 		}
-
-		public void OnGet()
-		{
-			foreach (var outages in
-			from Outage outages in allOutages
-			select outages)
-			{
-				Console.WriteLine(outages.SatelliteVehicleId);
-			}
-		}
 	}
 }
