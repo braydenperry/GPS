@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPS.Service.Conrollers
@@ -11,21 +10,22 @@ namespace GPS.Service.Conrollers
     [ApiController]
     public class ManageOutagesController : ControllerBase
     {
+        #region Properties
         public static IWebHostEnvironment _environment;
 
+        // File path for the current.sof file.
         private readonly string _filePath;
+        #endregion
 
+        #region Constructor
         public ManageOutagesController(IWebHostEnvironment environment)
         {
             _environment = environment;
             _filePath = _environment.WebRootPath + "\\SOF\\current.sof";
         }
-        
-        public class FileUpload
-        {
-            public IFormFile File { get; set; }
-        }
-        
+        #endregion
+
+        #region HTTP Methods
         [HttpPost]
         public async Task<string> Post([FromForm] FileUpload file)
         {
@@ -33,17 +33,14 @@ namespace GPS.Service.Conrollers
             try
             {
 
-                if (file.File.Length > 0) // Make sure there's actually a file
+                if (file.File.Length > 0) // Make sure there's actually a file being uploaded.
                 {
+                    // Get file path for new file being uploaded.
                     var newFilePath = _environment.WebRootPath + "\\SOF\\" + file.File.FileName;
-
-                    if (SOFExists())
-                    {
-                        Delete();
-                    }
                     
-                    if (ValidExtension(newFilePath))
+                    if (ValidExtension(newFilePath)) // Make sure new file being uploaded has .sof extension.
                     {
+                        // Create or overwrite a file at the secified path.  
                         using FileStream fileStream = System.IO.File.Create(newFilePath);
                         await file.File.CopyToAsync(fileStream);
                         fileStream.Flush();
@@ -57,7 +54,7 @@ namespace GPS.Service.Conrollers
                 }
                 else
                 {
-                    return "File failed to upload.";
+                    return "No file provided.";
                 }
 
             }
@@ -75,8 +72,9 @@ namespace GPS.Service.Conrollers
             try
             {
 
-                if (SOFExists())
+                if (SOFExists()) // Make sure the SOF file exists.
                 {
+                    // If it does, delete it.
                     System.IO.File.Delete(_filePath);
                 }
                 else
@@ -92,7 +90,13 @@ namespace GPS.Service.Conrollers
             }
             
         }
+        #endregion
 
+        #region Validation Methods
+        /// <summary>
+        /// Checks if the SOF file exists in the static resources of the app.
+        /// </summary>
+        /// <returns></returns>
         private bool SOFExists()
         {
 
@@ -107,11 +111,17 @@ namespace GPS.Service.Conrollers
 
         }
 
+        /// <summary>
+        /// Checks if the extension of a given file path is .sof. 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         private bool ValidExtension(string filePath)
         {
+            // Get the extesnion of the provided file path.
             string extension = Path.GetExtension(filePath);
             
-            if (extension.ToLower() == ".sof")
+            if (extension.ToLower() == ".sof") // Make sure the extension is .sof.
             {
                 return true;
             }
@@ -121,6 +131,7 @@ namespace GPS.Service.Conrollers
             }
 
         }
+        #endregion
 
     }
 }
