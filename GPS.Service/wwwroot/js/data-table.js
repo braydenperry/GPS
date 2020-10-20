@@ -13,8 +13,15 @@ $('.mydatatable tfoot th').each(function () {
 table.columns().every(function () {
     var that = this;
     $('input', this.footer()).on('keyup change', function () {
-        if (that.search() !== this.value) {
-            that.search(this.value).draw();
+        //create a special variable using .escapeRegex function
+        //see https://datatables.net/reference/api/$.fn.dataTable.util.escapeRegex()
+        var val = $.fn.dataTable.util.escapeRegex(
+            $(this).val()
+        );
+        //"val ? '^' + val : ''" expression functions as the string argument in 'search()' function
+        //'^' in a regular expression means the tested string must START with the respective string
+        if (that.search(val ? '^' + val : '', true, false)) {
+            that.draw();
         }
     })
 })
