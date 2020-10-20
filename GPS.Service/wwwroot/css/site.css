@@ -84,3 +84,7 @@ body {
 .upload .fa {
     font-size: 25px;
 }
+
+.mydatatable tfoot input{
+    max-width: 120px;
+}
