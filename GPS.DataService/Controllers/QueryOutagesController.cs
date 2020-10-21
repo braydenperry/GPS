@@ -10,7 +10,7 @@ namespace GPS.DataService.Controllers
     public class QueryOutagesController : Controller
     {
         #region Properties
-        public readonly IOutageRepository _outageRepository;
+        private readonly IOutageRepository _outageRepository;
         #endregion
 
         #region Constructor

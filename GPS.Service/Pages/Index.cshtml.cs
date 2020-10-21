@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 using GPS.Data;
 
 namespace GPS.WebApp.Pages
 {
-	public class IndexModel : PageModel
+    public class IndexModel : PageModel
 	{
-		private readonly ILogger<IndexModel> _logger;
-
-		public readonly Parser sofParser;
+		private readonly IOutageRepository _outageRepository;
 		public List<Outage> allOutages;
 
-		public IndexModel(ILogger<IndexModel> logger)
+		public IndexModel(IOutageRepository outageRepository)
 		{
-			sofParser = new Parser("SOF\\current.sof");
-			allOutages = sofParser.PopulateObjectsFromSof();
-			_logger = logger;
+			_outageRepository = outageRepository;
+			allOutages = _outageRepository.Get();
 		}
 	}
 }

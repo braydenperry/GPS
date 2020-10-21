@@ -32,9 +32,11 @@ namespace GPS.Data
 		{
 			try
 			{
+				string executionFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+				string sofPath = Path.Combine(executionFolder, "SOF/current.sof");
 				//Serializes the .sof and populates each of the classes
 				Serializer = new XmlSerializer(typeof(GpsIsFile));
-				using Stream reader = new FileStream("\\SOF\\current.sof", FileMode.Open);
+				using Stream reader = new FileStream(sofPath, FileMode.Open);
 				Outages = (GpsIsFile)Serializer.Deserialize(reader);
 			}
 			catch (FileNotFoundException)

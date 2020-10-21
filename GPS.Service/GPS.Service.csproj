@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GPS.Tests\GPS.Tests.csproj" />
+    <ProjectReference Include="..\GPS.DataService\GPS.DataService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
