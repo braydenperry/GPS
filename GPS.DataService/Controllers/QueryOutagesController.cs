@@ -9,26 +9,27 @@ namespace GPS.DataService.Controllers
     [ApiController]
     public class QueryOutagesController : Controller
     {
-        private readonly Parser _parser;
+        #region Properties
+        public readonly IOutageRepository _outageRepository;
+        #endregion
 
-        private readonly List<Outage> _allOutages;
-
-        public QueryOutagesController()
+        #region Constructor
+        public QueryOutagesController(IOutageRepository outageRepository)
         {
-            _parser = new Parser();
-            _allOutages = _parser.PopulateObjectsFromSof();
+            _outageRepository = outageRepository;
         }
+        #endregion
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Json(_allOutages);
+            return Json(_outageRepository.Get());
         }
 
         [HttpGet("{tagName}")]
         public IActionResult Get(string tagName)
         {
-            return Json(_allOutages.Where(o => o.TagName == tagName.ToUpper()));
+            return Json(_outageRepository.Get().Where(o => o.TagName == tagName.ToUpper()));
         }
     }
 }

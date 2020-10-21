@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace GPS.DataService
+namespace GPS.Data
 {
     public class FileUpload
     {

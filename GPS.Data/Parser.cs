@@ -32,10 +32,10 @@ namespace GPS.Data
 		{
 			try
 			{
-					//Serializes the .sof and populates each of the classes
-					Serializer = new XmlSerializer(typeof(GpsIsFile));
-					using Stream reader = new FileStream("\\SOF\\current.sof", FileMode.Open);
-					Outages = (GpsIsFile)Serializer.Deserialize(reader);
+				//Serializes the .sof and populates each of the classes
+				Serializer = new XmlSerializer(typeof(GpsIsFile));
+				using Stream reader = new FileStream("\\SOF\\current.sof", FileMode.Open);
+				Outages = (GpsIsFile)Serializer.Deserialize(reader);
 			}
 			catch (FileNotFoundException)
 			{
