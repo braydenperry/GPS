@@ -24,23 +24,38 @@ namespace GPS.Data
         /// object in reference to Validate.cs
         /// </summary>
         readonly Validate ValidateObj = new Validate();
-		/// <summary>
-		/// Object Created to coordinate with the lock
-		/// </summary>
-		private readonly object SerializeLock = new object();
 
+		/// <summary>
+		/// Constructor that is hard-coded to route to the current.sof file.
+		/// </summary>
+		public Parser()
+		{
+			try
+			{
+					//Serializes the .sof and populates each of the classes
+					Serializer = new XmlSerializer(typeof(GpsIsFile));
+					using Stream reader = new FileStream("\\SOF\\current.sof", FileMode.Open);
+					Outages = (GpsIsFile)Serializer.Deserialize(reader);
+			}
+			catch (FileNotFoundException)
+			{
+				Console.WriteLine("FileNotFoundException");
+				//TODO: navigate to an error page if this is the case
+				System.Environment.Exit(1);
+			}
+		}
+		/// <summary>
+		/// Overloaded constructor that will accept a file path for testing's sake.
+		/// </summary>
+		/// <param name="filePath"></param>
 		public Parser(string filePath)
 		{
 			try
 			{
-				//Thread protection for whatever file is passed into the serializer
-				lock (SerializeLock)
-                {
-					//Serializes the .sof and populates each of the classes
-					Serializer = new XmlSerializer(typeof(GpsIsFile));
-					using Stream reader = new FileStream(filePath, FileMode.Open);
-					Outages = (GpsIsFile)Serializer.Deserialize(reader);
-				}
+				//Serializes the .sof and populates each of the classes
+				Serializer = new XmlSerializer(typeof(GpsIsFile));
+				using Stream reader = new FileStream(filePath, FileMode.Open);
+				Outages = (GpsIsFile)Serializer.Deserialize(reader);
 			}
 			catch (FileNotFoundException)
 			{

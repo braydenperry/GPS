@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GPS.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GPS.Service.Conrollers
+namespace GPS.DataService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,7 +15,7 @@ namespace GPS.Service.Conrollers
 
         public QueryOutagesController()
         {
-            _parser = new Parser("SOF\\current.sof");
+            _parser = new Parser();
             _allOutages = _parser.PopulateObjectsFromSof();
         }
 
