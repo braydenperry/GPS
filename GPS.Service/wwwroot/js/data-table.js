@@ -9,19 +9,61 @@ $('.mydatatable tfoot th').each(function () {
     $(this).html('<input type="text" placeholder="Search" />');
 });
 
-//search functionality
-table.columns().every(function () {
-    var that = this;
-    $('input', this.footer()).on('keyup change', function () {
-        //create a special variable using .escapeRegex function
-        //see https://datatables.net/reference/api/$.fn.dataTable.util.escapeRegex()
-        var val = $.fn.dataTable.util.escapeRegex(
-            $(this).val()
-        );
-        //"val ? '^' + val : ''" expression functions as the string argument in 'search()' function
-        //'^' in a regular expression means the tested string must START with the respective string
-        if (that.search(val ? '^' + val : '', true, false)) {
-            that.draw();
-        }
-    })
-})
+////search functionality
+//table.columns().every(function () {
+//    var that = this;
+//    $('input', this.footer()).on('keyup change', function () {
+//        //create a special variable using .escapeRegex function
+//        //see https://datatables.net/reference/api/$.fn.dataTable.util.escapeRegex()
+//        var val = $.fn.dataTable.util.escapeRegex(
+//            $(this).val()
+//        );
+//        //"val ? '^' + val : ''" expression functions as the string argument in 'search()' function
+//        //'^' in a regular expression means the tested string must START with the respective string
+//        if (that.search(val ? '^' + val : '', true, false)) {
+//            that.draw();
+//        }
+//    })
+//})
+
+
+table.columns().indexes().flatten().each(function (i) {
+    var column = table.column(i);
+    // Dropdown columns ('Tag Name' and 'Type')
+    if (i === 0 | i === 5) {
+        var select = $('<select><option value=""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on('change', function () {
+                // Escape the expression so we can perform a regex match
+                var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+
+                column
+                    .search(val ? '^' + val + '$' : '', true, false)
+                    .draw();
+            });
+
+        column.data().unique().sort().each(function (d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+        });
+    }
+    // Search columns
+    else {
+        table.columns().every(function () {
+            var that = this;
+            $('input', this.footer()).on('keyup change', function () {
+                //create a special variable using .escapeRegex function
+                //see https://datatables.net/reference/api/$.fn.dataTable.util.escapeRegex()
+                var val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                //"val ? '^' + val : ''" expression functions as the string argument in 'search()' function
+                //'^' in a regular expression means the tested string must START with the respective string
+                if (that.search(val ? '^' + val : '', true, false)) {
+                    that.draw();
+                }
+            })
+        })
+    }
+});
