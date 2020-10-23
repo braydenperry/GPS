@@ -5,7 +5,6 @@
 
 //searching box
 $('.mydatatable tfoot th').each(function () {
-    var title = $(this).text();
     $(this).html('<input type="text" placeholder="Search" />');
 });
 
