@@ -1,5 +1,5 @@
 ﻿$('.mydatatable').ready(function () {
-    //implements 'ultimate date/time sorting plugin
+    //implements 'ultimate date/time sorting' plugin
     $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
 
     $('.mydatatable').DataTable({
