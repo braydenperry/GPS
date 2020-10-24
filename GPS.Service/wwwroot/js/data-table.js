@@ -1,6 +1,12 @@
-﻿var table = $('.mydatatable').DataTable({
+﻿$('.mydatatable').ready(function () {
+    //implements 'ultimate date/time sorting plugin
+    $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
+
+    $('.mydatatable').DataTable({
     lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
     //searching: false
+    });
+
 });
 
 //searching box
@@ -48,3 +54,4 @@ table.columns().indexes().flatten().each(function (i) {
         })
     }
 });
+
