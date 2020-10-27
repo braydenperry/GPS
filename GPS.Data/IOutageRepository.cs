@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GPS.Data
 {
@@ -8,7 +10,7 @@ namespace GPS.Data
     {
         public List<Outage> Get();
 
-        public void Upload(FileUpload file);
+        public void Upload(IFormFile file);
 
         public void Delete();
     }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using GPS.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPS.DataService.Controllers
@@ -24,15 +26,13 @@ namespace GPS.DataService.Controllers
 
         #region HTTP Methods
         [HttpPost]
-        public string Post([FromForm] FileUpload file)
+        public string Post(IFormFile file)
         {
 
             try
             {
-
                 _outageRepository.Upload(file);
                 return "File uploaded";
-
             }
             catch (Exception ex)
             {
@@ -47,10 +47,8 @@ namespace GPS.DataService.Controllers
 
             try
             {
-
                 _outageRepository.Delete();
                 return "File deleted";
-                
             }
             catch (Exception ex)
             {

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GPS.Data
 {
@@ -44,22 +46,23 @@ namespace GPS.Data
 
         }
 
-        public void Upload(FileUpload file)
+        public void Upload(IFormFile file)
         {
 
             lock (SOFFileLock)
             {
 
-                if (file.File.Length > 0) // Make sure there's actually a file being uploaded.
+                if (file.Length > 0) // Make sure there's actually a file being uploaded.
                 {
                     // Get file path for new file being uploaded.
-                    var newFilePath = "\\SOF\\" + file.File.FileName;
+                    string executionFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                    string sofPath = Path.Combine(executionFolder, "SOF/current.sof");
 
-                    if (ValidExtension(newFilePath)) // Make sure new file being uploaded has .sof extension.
+                    if (ValidExtension(sofPath)) // Make sure new file being uploaded has .sof extension.
                     {
                         // Create or overwrite a file at the secified path.  
-                        using FileStream fileStream = File.Create(newFilePath);
-                        file.File.CopyToAsync(fileStream);
+                        using FileStream fileStream = File.Create(sofPath);
+                        file.CopyTo(fileStream);
                         fileStream.Flush();
                     }
 

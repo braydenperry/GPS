@@ -10,16 +10,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.9" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="SOF\current.sof">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="SOF\invalidTest.sof">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="SOF\validTest.sof">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
