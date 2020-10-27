@@ -98,5 +98,5 @@ body {
 
 /*Originally changed to fit table within container; somehow this change made the page scalable. */
 .mydatatable th {
-   max-width: 50px;
+   max-width: 70px;
 }
