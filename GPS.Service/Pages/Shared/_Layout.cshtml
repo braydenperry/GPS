@@ -6,9 +6,18 @@
     <title>@ViewData["Title"] - GPS Satellite Outages</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css" />
+
+    @*Already localized "bootstrap.min.css"*@
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />*@
+
+    @*localize "dataTables.bootstrap4.min.css"*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/dataTables.bootstrap4.min.css" />
+
+    @*localize "responsive.bootstrap4.min.css"*@
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap4.min.css" />*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/responsive.bootstrap4.min.css" />
+
 </head>
 <body>
     <header>
@@ -47,17 +56,42 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+    @*localize "jquery-3.3.1.min.js"*@
+    @*<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>*@
+    <script src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+    @*localize "popper.min.js"*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>*@
+    <script src="~/lib/cloudflare/popper.min.js"></script>
+
+    @*localize "bootstrap.min.js"*@
+    @*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>*@
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    @*localize "jquery.dataTables.min.js"*@
+    @*<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>*@
+    <script src="~/js/jquery.dataTables.min.js"></script>
+
+    @*localize dataTables.bootstrap4.min.js*@
+    @*<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>*@
+    <script src="~/js/dataTables.bootstrap4.min.js"></script>
+
+    @*localize datatables.responsive.min.js*@
+    @*<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>*@
+    <script src="~/js/dataTables.responsive.min.js"></script>
+
+    @*localize responsive.bootstrap4.min.js*@
+    @*<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>*@
+    <script src="~/js/responsive.bootstrap4.min.js"></script>
+
+    @*localize moment.min.js*@
+    @*<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>*@
+    <script src="~/lib/cloudflare/moment.min.js"></script>
+
+    @*localize datetime-moment.js*@
+    @*<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>*@
+    <script src="~/js/datetime-moment.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
