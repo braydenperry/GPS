@@ -15,6 +15,7 @@ namespace GPS.Data
 		public GpsIsFile Outages { get; set; }
 
 		private readonly List<string> _errorLog = new List<string>();
+
 		/// <summary>
 		/// A list of strings containing all the errors that arise from the validation of the .sof file.
 		/// </summary>
@@ -32,9 +33,12 @@ namespace GPS.Data
 		{
 			try
 			{
-				string executionFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-				string sofPath = Path.Combine(executionFolder, "SOF/current.sof");
-				//Serializes the .sof and populates each of the classes
+				// Gets the path of the solution
+				string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+				// Combines the path of the working directory with the relative path to the SOF file
+				string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\current.sof");
+
+				// Deserializes the .sof file and populates each of the classes
 				Serializer = new XmlSerializer(typeof(GpsIsFile));
 				using Stream reader = new FileStream(sofPath, FileMode.Open);
 				Outages = (GpsIsFile)Serializer.Deserialize(reader);
