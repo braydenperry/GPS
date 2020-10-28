@@ -39,11 +39,10 @@ namespace GPS.Data
 				using Stream reader = new FileStream(sofPath, FileMode.Open);
 				Outages = (GpsIsFile)Serializer.Deserialize(reader);
 			}
-			catch (FileNotFoundException)
+			catch (Exception ex)
 			{
-				Console.WriteLine("FileNotFoundException");
+				Console.WriteLine(ex);
 				//TODO: navigate to an error page if this is the case
-				System.Environment.Exit(1);
 			}
 		}
 		/// <summary>
