@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GPS.Data;
+using GPS.Data; // NOTE: FOR TESTING PURPOSES ONLY. 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,6 +22,7 @@ namespace GPS.WebApp
         {
             services.AddRazorPages();
             services.AddControllers();
+            // NOTE: FOR TESTING PURPOSES ONLY.
             services.AddSingleton<IOutageRepository, OutageRepository>();
         }
 
@@ -46,7 +42,6 @@ namespace GPS.WebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();

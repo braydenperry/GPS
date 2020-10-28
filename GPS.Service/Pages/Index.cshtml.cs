@@ -1,18 +1,12 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using GPS.Data;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace GPS.WebApp.Pages
 {
     public class IndexModel : PageModel
 	{
-		// private readonly IOutageRepository _outageRepository;
-		// public List<Outage> allOutages;
-
-		public IndexModel(IOutageRepository outageRepository)
+		public IndexModel()
 		{
-			// _outageRepository = outageRepository;
-			// allOutages = _outageRepository.Get();
+			
 		}
 	}
 }
