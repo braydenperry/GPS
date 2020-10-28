@@ -67,6 +67,15 @@ namespace GPS.Data
 		}
 
 		/// <summary>
+		/// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
+		/// </summary>
+		enum retVal
+		{
+			validWithEndTime = 1,
+			validNoEndTime = 2,
+			invalid = 3
+		}
+		/// <summary>
 		/// Takes a .sof and populates the classes with the information included therein
 		/// </summary>
 		/// <returns>
@@ -128,7 +137,7 @@ namespace GPS.Data
 			{
 				int valid = ValidateObj.ValidatePredicted(predictedOutage);
 				//if invalid
-				if (valid == 3)
+				if (valid == (int)retVal.invalid)
 				{
 					//If there is an error, log it and continue with the next iteration of the loop
 					_errorLog.Add("The Predicted tag with the reference number " + predictedOutage.Reference + " is invalid and was not added to the all outages list");
@@ -136,7 +145,7 @@ namespace GPS.Data
 				}
 
 				//if end time exists
-				if (valid == 1)
+				if (valid == (int)retVal.validWithEndTime)
 				{
 					allOutages.Add(new Outage
 					{
@@ -151,7 +160,7 @@ namespace GPS.Data
 					});
 				}
 				//if end time does NOT exist
-				if (valid == 2)
+				if (valid == (int)retVal.validNoEndTime)
 				{
 					allOutages.Add(new Outage
 					{
