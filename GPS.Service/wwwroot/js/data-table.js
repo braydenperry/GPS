@@ -1,20 +1,29 @@
-﻿var table = $('.mydatatable').DataTable({
-    lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
-    //searching: false
+﻿var dataTable;
+
+$(document).ready(function () {
+    loadList();
 });
 
-//searching box
-$('.mydatatable tfoot th').each(function () {
-    var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Search" />');
-});
-
-//search functionality
-table.columns().every(function () {
-    var that = this;
-    $('input', this.footer()).on('keyup change', function () {
-        if (that.search() !== this.value) {
-            that.search(this.value).draw();
-        }
-    })
-})
+function loadList() {
+    dataTable = $('#DT_load').DataTable({
+        "ajax": {
+            "url": "/api/queryoutages",
+            "type": "GET",
+            "datatype": "json",
+            "dataSrc": ""
+        },
+        "columns": [
+            { data: "tagName" },
+            { data: "satelliteVehicleId" },
+            { data: "satelliteVehicleNumber" },
+            { data: "startTime" },
+            { data: "endTime" },
+            { data: "type" },
+            { data: "reference" }
+        ],
+        "language": {
+            "emptyTable": "no data found."
+        },
+        "width": "100%"
+    });
+}
