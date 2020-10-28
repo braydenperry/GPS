@@ -69,7 +69,7 @@ namespace GPS.Data
 		/// <summary>
 		/// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
 		/// </summary>
-		enum retVal
+		private enum retVal
 		{
 			validWithEndTime = 1,
 			validNoEndTime = 2,
