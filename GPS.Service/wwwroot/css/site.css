@@ -84,3 +84,19 @@ body {
 .upload .fa {
     font-size: 25px;
 }
+
+/*Increase dropdown height to match search box dimensions*/
+.mydatatable tfoot select {
+    max-width: 100%;
+    min-height: 30px;
+}
+
+/*Change max-width to percentage to fit within 'tfoot'*/
+.mydatatable tfoot input {
+    max-width: 100%;
+}
+
+/*Originally changed to fit table within container; somehow this change made the page scalable. */
+.mydatatable th {
+   max-width: 70px;
+}
