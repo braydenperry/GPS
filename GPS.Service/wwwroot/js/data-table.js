@@ -5,9 +5,6 @@
     let table = $('.mydatatable').DataTable({
         lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
         //searching: false
-        "search": {
-            "smart": true
-        }
     });
 
     //searching box
