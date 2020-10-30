@@ -16,7 +16,7 @@ namespace GPS.Test
         /// </summary>
         public ParserShouldNot()
         {
-            _parser = new Parser("SOF\\invalidTest.sof");
+            _parser = new Parser("invalidTest.sof");
             _allOutages = _parser.PopulateObjectsFromSof();
         }
 

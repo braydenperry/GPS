@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-	ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Page";
 }
 
 <div class="row justify-content-center">
@@ -9,46 +9,89 @@
         <table id="DT_load" class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th>Tag Name</th>
-                    <th>Vehicle ID</th>
-                    <th>Number</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Type</th>
-                    <th>Reference</th>
+                    <th>
+                        Tag Name
+                    </th>
+                    <th>
+                        Satellite Vehicle ID
+                    </th>
+                    <th>
+                        Satellite Vehicle Number
+                    </th>
+                    <th>
+                        Start Time
+                    </th>
+                    <th>
+                        End Time
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Reference
+                    </th>
                 </tr>
             </thead>
-
-            <tbody>
-                @foreach (var outage in Model.allOutages) 
-                {
-                    <tr>
-                        <td>@outage.TagName</td>
-                        <td>@outage.SatelliteVehicleId </td>
-                        <td>@outage.SatelliteVehicleNumber</td>
-                        <td>@outage.StartTime</td>
-                        <td>@outage.EndTime</td>
-                        <td>@outage.Type</td>
-                        <td>@outage.Reference</td>
-                    </tr>
-                }
-            </tbody>
-
-            <tfoot>
-                <tr>
-                    <th>Tag Name</th>
-                    <th>Vehicle ID</th>
-                    <th>Number</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Type</th>
-                    <th>Reference</th>
-                </tr>
-            </tfoot>
         </table>
-    </div> 
+    </div>
 </div>
 
 @section Scripts {
-	<script src="~/js/data-table.js"></script>
+    <script src="~/js/data-table.js"></script>
 }
+
+
+@*@page
+    @model IndexModel
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <table id="DT_load" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tag Name</th>
+                        <th>Vehicle ID</th>
+                        <th>Number</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type</th>
+                        <th>Reference</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var outage in Model.allOutages)
+                    {
+                        <tr>
+                            <td>@outage.TagName</td>
+                            <td>@outage.SatelliteVehicleId </td>
+                            <td>@outage.SatelliteVehicleNumber</td>
+                            <td>@outage.StartTime</td>
+                            <td>@outage.EndTime</td>
+                            <td>@outage.Type</td>
+                            <td>@outage.Reference</td>
+                        </tr>
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <th>Tag Name</th>
+                        <th>Vehicle ID</th>
+                        <th>Number</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type</th>
+                        <th>Reference</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="~/js/data-table.js"></script>
+    }*@

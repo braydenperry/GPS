@@ -17,8 +17,19 @@ namespace GPS.Data
 
         public OutageRepository()
         {
-            _parser = new Parser();
-            _allOutages = _parser.PopulateObjectsFromSof();
+            lock (SOFFileLock){
+                _parser = new Parser();
+            }
+
+            if (_parser.Outages != null)
+            {
+                    _allOutages = _parser.PopulateObjectsFromSof();
+
+            }
+            else
+            {
+                //Send an error code because a file could not be found to pull outage data from
+            }
         }
 
         public void Delete()
