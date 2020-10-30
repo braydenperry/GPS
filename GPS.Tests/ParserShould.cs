@@ -11,6 +11,7 @@ namespace GPS.Test
 		private readonly Parser _parser;
 		private readonly List<Outage> _allOutages;
 
+
 		/// <summary>
 		/// Load data into parser and allOutages
 		/// </summary>

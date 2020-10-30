@@ -50,6 +50,7 @@ namespace GPS.Data
 			//If all tests pass, return true
 			return true;
 		}
+
 		/// <summary>
 		/// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
 		/// </summary>
