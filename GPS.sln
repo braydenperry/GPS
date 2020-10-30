@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Service", "GPS.Service\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GPS.Data", "GPS.Data\GPS.Data.csproj", "{E5033B8A-6C02-4B9C-8D4D-17AF53323367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPS.DataService", "GPS.DataService\GPS.DataService.csproj", "{0DC77CDE-99C2-40EC-888A-0FC6A10B29FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E5033B8A-6C02-4B9C-8D4D-17AF53323367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5033B8A-6C02-4B9C-8D4D-17AF53323367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5033B8A-6C02-4B9C-8D4D-17AF53323367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC77CDE-99C2-40EC-888A-0FC6A10B29FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC77CDE-99C2-40EC-888A-0FC6A10B29FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC77CDE-99C2-40EC-888A-0FC6A10B29FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC77CDE-99C2-40EC-888A-0FC6A10B29FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

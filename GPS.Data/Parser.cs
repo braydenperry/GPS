@@ -15,6 +15,7 @@ namespace GPS.Data
 		public GpsIsFile Outages { get; set; }
 
 		private readonly List<string> _errorLog = new List<string>();
+
 		/// <summary>
 		/// A list of strings containing all the errors that arise from the validation of the .sof file.
 		/// </summary>
@@ -24,23 +25,42 @@ namespace GPS.Data
         /// object in reference to Validate.cs
         /// </summary>
         readonly Validate ValidateObj = new Validate();
-		/// <summary>
-		/// Object Created to coordinate with the lock
-		/// </summary>
-		private readonly object SerializeLock = new object();
 
+		/// <summary>
+		/// Constructor that is hard-coded to route to the current.sof file.
+		/// </summary>
+		public Parser()
+		{
+			try
+			{
+				// Gets the path of the solution
+				string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+				// Combines the path of the working directory with the relative path to the SOF file
+				string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\current.sof");
+
+				// Deserializes the .sof file and populates each of the classes
+				Serializer = new XmlSerializer(typeof(GpsIsFile));
+				using Stream reader = new FileStream(sofPath, FileMode.Open);
+				Outages = (GpsIsFile)Serializer.Deserialize(reader);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+				//TODO: navigate to an error page if this is the case
+			}
+		}
+		/// <summary>
+		/// Overloaded constructor that will accept a file path for testing's sake.
+		/// </summary>
+		/// <param name="filePath"></param>
 		public Parser(string filePath)
 		{
 			try
 			{
-				//Thread protection for whatever file is passed into the serializer
-				lock (SerializeLock)
-                {
-					//Serializes the .sof and populates each of the classes
-					Serializer = new XmlSerializer(typeof(GpsIsFile));
-					using Stream reader = new FileStream(filePath, FileMode.Open);
-					Outages = (GpsIsFile)Serializer.Deserialize(reader);
-				}
+				//Serializes the .sof and populates each of the classes
+				Serializer = new XmlSerializer(typeof(GpsIsFile));
+				using Stream reader = new FileStream(filePath, FileMode.Open);
+				Outages = (GpsIsFile)Serializer.Deserialize(reader);
 			}
 			catch (FileNotFoundException)
 			{
@@ -50,6 +70,15 @@ namespace GPS.Data
 			}
 		}
 
+		/// <summary>
+		/// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
+		/// </summary>
+		private enum retVal
+		{
+			validWithEndTime = 1,
+			validNoEndTime = 2,
+			invalid = 3
+		}
 		/// <summary>
 		/// Takes a .sof and populates the classes with the information included therein
 		/// </summary>
@@ -112,7 +141,7 @@ namespace GPS.Data
 			{
 				int valid = ValidateObj.ValidatePredicted(predictedOutage);
 				//if invalid
-				if (valid == 3)
+				if (valid == (int)retVal.invalid)
 				{
 					//If there is an error, log it and continue with the next iteration of the loop
 					_errorLog.Add("The Predicted tag with the reference number " + predictedOutage.Reference + " is invalid and was not added to the all outages list");
@@ -120,7 +149,7 @@ namespace GPS.Data
 				}
 
 				//if end time exists
-				if (valid == 1)
+				if (valid == (int)retVal.validWithEndTime)
 				{
 					allOutages.Add(new Outage
 					{
@@ -135,7 +164,7 @@ namespace GPS.Data
 					});
 				}
 				//if end time does NOT exist
-				if (valid == 2)
+				if (valid == (int)retVal.validNoEndTime)
 				{
 					allOutages.Add(new Outage
 					{

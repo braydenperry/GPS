@@ -9,19 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GPS.Tests\GPS.Tests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="SOF\current.sof">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="SOF\validTest.sof">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
@@ -29,6 +16,11 @@
     <None Include="wwwroot\SOF\SOFDownloadFile.sof">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GPS.DataService\GPS.DataService.csproj" />
+    <ProjectReference Include="..\GPS.Data\GPS.Data.csproj" />
   </ItemGroup>
 
 </Project>

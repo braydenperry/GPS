@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GPS.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
-namespace GPS.Service.Conrollers
+namespace GPS.DataService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,7 +14,7 @@ namespace GPS.Service.Conrollers
 
         public ViewErrorsController()
         {
-            _parser = new Parser("SOF\\current.sof");
+            _parser = new Parser();
             _parser.PopulateObjectsFromSof();
             _allErrors = _parser.ErrorLog;
 

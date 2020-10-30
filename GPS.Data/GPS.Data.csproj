@@ -6,4 +6,19 @@
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="SOF\current.sof" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SOF\current.sof">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.9" />
+  </ItemGroup>
+
 </Project>

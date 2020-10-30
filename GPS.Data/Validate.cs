@@ -52,6 +52,15 @@ namespace GPS.Data
 		}
 
 		/// <summary>
+		/// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
+		/// </summary>
+        private enum retVal
+        {
+			validWithEndTime =1,
+			validNoEndTime = 2,
+			invalid = 3
+        }
+		/// <summary>
 		/// Returns 1 if valid and end time exists
 		/// Returns 2 if valid and NO end time
 		/// Returns 3 if invalid
@@ -81,7 +90,7 @@ namespace GPS.Data
 					&& isNumeric(outage.EndSecond)
 					))
 				{
-					return 3;
+					return (int)retVal.invalid;
 				}
 				//create start and end time varibles for Predicted outage
 				DateTime StartTime = GpsIsFile.ToDateTime(int.Parse(outage.StartYear), int.Parse(outage.StartDayOfYear), int.Parse(outage.StartHour), int.Parse(outage.StartMinute), int.Parse(outage.StartSecond));
@@ -90,7 +99,7 @@ namespace GPS.Data
 				//Validate start time is less than end time
 				if (StartTime > EndTime)
 				{
-					return 3;
+					return (int)retVal.invalid;
 				}
 			}
 			//if end time does not exist
@@ -107,24 +116,24 @@ namespace GPS.Data
 					&& isNumeric(outage.StartSecond)
 					))
 				{
-					return 3;
+					return (int)retVal.invalid;
 				}
 			}
 
 			//Validate name and type are NOT numbers
 			if (outage.Name.Any(char.IsDigit) || outage.Type.Any(char.IsDigit))
 			{
-				return 3;
+				return (int)retVal.invalid;
 			}
 
 			//If all tests pass, return true
 			if (endYearExists)
-			{ 
-				return 1;
+			{
+				return (int)retVal.validWithEndTime;
 			}
 			else
 			{
-				return 2;
+				return (int)retVal.validNoEndTime;
 			}
 		}
 
