@@ -1,4 +1,35 @@
-﻿$('.mydatatable').ready(function () {
+﻿var dataTable;
+
+$(document).ready(function () {
+    loadList();
+});
+
+function loadList() {
+    dataTable = $('#DT_load').DataTable({
+        "ajax": {
+            "url": "/api/queryoutages",
+            "type": "GET",
+            "datatype": "json",
+            "dataSrc": ""
+        },
+        "columns": [
+            { data: "tagName" },
+            { data: "satelliteVehicleId" },
+            { data: "satelliteVehicleNumber" },
+            { data: "startTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
+            { data: "endTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
+            { data: "type" },
+            { data: "reference" }
+        ],
+        "language": {
+            "emptyTable": "no data found."
+        },
+        "width": "100%"
+    });
+}
+
+/*
+$('.mydatatable').ready(function () {
     //implements 'ultimate date/time sorting' plugin: https://datatables.net/blog/2014-12-18
     $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
 
@@ -52,5 +83,5 @@
             })
         }
     });
-
 });
+*/
