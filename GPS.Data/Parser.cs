@@ -60,7 +60,7 @@ namespace GPS.Data
 				if (filePath == "validTest.sof")
 				{
 					// Gets the path of the solution
-					string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+					string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
 					// Combines the path of the working directory with the relative path to the SOF file
 					string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\validTest.sof");
 
@@ -70,9 +70,9 @@ namespace GPS.Data
 					Outages = (GpsIsFile)Serializer.Deserialize(reader);
 				}
 				else if (filePath == "invalidTest.sof")
-                {
+				{
 					// Gets the path of the solution
-					string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+					string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
 					// Combines the path of the working directory with the relative path to the SOF file
 					string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\invalidTest.sof");
 
@@ -81,12 +81,12 @@ namespace GPS.Data
 					using Stream reader = new FileStream(sofPath, FileMode.Open);
 					Outages = (GpsIsFile)Serializer.Deserialize(reader);
 				}
-
 			}
 			catch (Exception ex)
 			{
 				_errorLog.Add(ex.ToString());
 			}
+
 		}
 
 		/// <summary>
