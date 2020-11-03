@@ -40,7 +40,7 @@ namespace GPS.Data
 				return false;
 			}
 
-			//Validate that historical outage end time is not greater than historical outage start time
+			//Validate that historical outage end time is not less than start time
 			//or greater than current time
 			if (EndTime > CurrentTime || EndTime < StartTime)
 			{
