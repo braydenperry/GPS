@@ -38,23 +38,6 @@ $('.mydatatable').ready(function () {
         $(this).html('<input type="text" placeholder="Search" />');
     });
 
-})
-
-
-$('.mydatatable').ready(function () {
-//    //implements 'ultimate date/time sorting' plugin: https://datatables.net/blog/2014-12-18
-//    $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
-
-//    let table = $('.mydatatable').DataTable({
-//        lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
-//        //searching: false
-//    });
-
-//    //searching box
-//    $('.mydatatable tfoot th').each(function () {
-//        $(this).html('<input type="text" placeholder="Search" />');
-//    });
-
     localDataTable.columns().indexes().flatten().each(function (i) {
         var column = localDataTable.column(i);
         // Dropdown columns ('Tag Name' and 'Type')
@@ -70,8 +53,8 @@ $('.mydatatable').ready(function () {
                     column
                         .search(val ? '^' + val + '$' : '', true, false)
                         .draw();
-                });
 
+                });
             column.data().unique().sort().each(function (d, j) {
                 select.append('<option value="' + d + '">' + d + '</option>')
             });
