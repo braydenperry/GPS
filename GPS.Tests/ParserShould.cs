@@ -101,8 +101,8 @@ namespace GPS.Test
 		public void CheckFirstHistoricalTag()
 		{
 			Assert.Equal("HISTORICAL", _allOutages[0].TagName);
-			Assert.Equal("8", _allOutages[0].SpaceVehicleId);
-			Assert.Equal("38", _allOutages[0].SpaceVehicleNumber);
+			Assert.Equal("8", _allOutages[0].SatelliteVehicleId);
+			Assert.Equal("38", _allOutages[0].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[0].Name);
 			Assert.Equal("UNUSABLE", _allOutages[0].Type);
 			Assert.Equal("1998006", _allOutages[0].Reference);
@@ -117,8 +117,8 @@ namespace GPS.Test
 		public void CheckSecondHistoricalTag()
 		{
 			Assert.Equal("HISTORICAL", _allOutages[1].TagName);
-			Assert.Equal("24", _allOutages[1].SpaceVehicleId);
-			Assert.Equal("24", _allOutages[1].SpaceVehicleNumber);
+			Assert.Equal("24", _allOutages[1].SatelliteVehicleId);
+			Assert.Equal("24", _allOutages[1].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[1].Name);
 			Assert.Equal("FCSTSUMM", _allOutages[1].Type);
 			Assert.Equal("1998014", _allOutages[1].Reference);
@@ -133,8 +133,8 @@ namespace GPS.Test
 		public void CheckFirstCurrentTag()
 		{
 			Assert.Equal("CURRENT", _allOutages[2].TagName);
-			Assert.Equal("14", _allOutages[2].SpaceVehicleId);
-			Assert.Equal("41", _allOutages[2].SpaceVehicleNumber);
+			Assert.Equal("14", _allOutages[2].SatelliteVehicleId);
+			Assert.Equal("41", _allOutages[2].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[2].Name);
 			Assert.Equal("FCSTUUFN", _allOutages[2].Type);
 			Assert.Equal("2020031", _allOutages[2].Reference);
@@ -148,8 +148,8 @@ namespace GPS.Test
 		public void CheckSecondCurrentTag()
 		{
 			Assert.Equal("CURRENT", _allOutages[3].TagName);
-			Assert.Equal("23", _allOutages[3].SpaceVehicleId);
-			Assert.Equal("76", _allOutages[3].SpaceVehicleNumber);
+			Assert.Equal("23", _allOutages[3].SatelliteVehicleId);
+			Assert.Equal("76", _allOutages[3].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[3].Name);
 			Assert.Equal("UNUSUFN", _allOutages[3].Type);
 			Assert.Equal("2020033", _allOutages[3].Reference);
@@ -163,8 +163,8 @@ namespace GPS.Test
 		public void CheckFirstPredictedTag()
 		{
 			Assert.Equal("PREDICTED", _allOutages[4].TagName);
-			Assert.Equal("23", _allOutages[4].SpaceVehicleId);
-			Assert.Equal("60", _allOutages[4].SpaceVehicleNumber);
+			Assert.Equal("23", _allOutages[4].SatelliteVehicleId);
+			Assert.Equal("60", _allOutages[4].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[4].Name);
 			Assert.Equal("FCSTUUFN", _allOutages[4].Type);
 			Assert.Equal("2020010", _allOutages[4].Reference);
@@ -178,8 +178,8 @@ namespace GPS.Test
 		public void CheckSecondPredictedTag()
 		{
 			Assert.Equal("PREDICTED", _allOutages[5].TagName);
-			Assert.Equal("25", _allOutages[5].SpaceVehicleId);
-			Assert.Equal("62", _allOutages[5].SpaceVehicleNumber);
+			Assert.Equal("25", _allOutages[5].SatelliteVehicleId);
+			Assert.Equal("62", _allOutages[5].SatelliteVehicleNumber);
 			Assert.Equal("NANU", _allOutages[5].Name);
 			Assert.Equal("FCSTMX", _allOutages[5].Type);
 			Assert.Equal("2020045", _allOutages[5].Reference);

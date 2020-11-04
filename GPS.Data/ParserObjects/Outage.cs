@@ -10,9 +10,9 @@ namespace GPS.Data
 	{
 		public string TagName { get; set; }
 
-		public string SpaceVehicleId { get; set; }
+		public string SatelliteVehicleId { get; set; }
 
-		public string SpaceVehicleNumber { get; set; }
+		public string SatelliteVehicleNumber { get; set; }
 
 		public string Name { get; set; }
 
