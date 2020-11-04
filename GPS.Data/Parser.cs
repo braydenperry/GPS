@@ -88,7 +88,21 @@ namespace GPS.Data
 		public List<Outage> PopulateObjectsFromSof()
 		{
 			//Populate the AllOutages List
-			List<Outage> allOutages = new List<Outage>();
+			List<Outage> allOutages = new List<Outage>
+			{
+				new Outage
+				{
+					TagName = "Creation",
+					StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
+				},
+
+				new Outage
+				{
+					TagName = "Reference",
+					StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
+				}
+			};
+
 			foreach (Historical historicalOutage in Outages.HistoricalOutages)
 			{
 				bool valid = ValidateObj.ValidateHistorical(historicalOutage);
@@ -98,15 +112,13 @@ namespace GPS.Data
 					_errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
 					continue;
 				}
-					
-				//TODO: This is where the error log message will go once we figure out what that's all about.
-				
 
+				//TODO: This is where the error log message will go once we figure out what that's all about.
 				allOutages.Add(new Outage
 				{
 					TagName = "HISTORICAL",
-					SatelliteVehicleId = historicalOutage.SatelliteVehicleId,
-					SatelliteVehicleNumber = historicalOutage.SatelliteVehicleNumber,
+					SpaceVehicleId = historicalOutage.SatelliteVehicleId,
+					SpaceVehicleNumber = historicalOutage.SatelliteVehicleNumber,
 					Name = historicalOutage.Name,
 					Type = historicalOutage.Type,
 					Reference = historicalOutage.Reference,
@@ -128,8 +140,8 @@ namespace GPS.Data
 				allOutages.Add(new Outage
 				{
 					TagName = "CURRENT",
-					SatelliteVehicleId = currentOutage.SatelliteVehicleId,
-					SatelliteVehicleNumber = currentOutage.SatelliteVehicleNumber,
+					SpaceVehicleId = currentOutage.SatelliteVehicleId,
+					SpaceVehicleNumber = currentOutage.SatelliteVehicleNumber,
 					Name = currentOutage.Name,
 					Type = currentOutage.Type,
 					Reference = currentOutage.Reference,
@@ -154,8 +166,8 @@ namespace GPS.Data
 					allOutages.Add(new Outage
 					{
 						TagName = "PREDICTED",
-						SatelliteVehicleId = predictedOutage.SatelliteVehicleId,
-						SatelliteVehicleNumber = predictedOutage.SatelliteVehicleNumber,
+						SpaceVehicleId = predictedOutage.SatelliteVehicleId,
+						SpaceVehicleNumber = predictedOutage.SatelliteVehicleNumber,
 						Name = predictedOutage.Name,
 						Type = predictedOutage.Type,
 						Reference = predictedOutage.Reference,
@@ -169,8 +181,8 @@ namespace GPS.Data
 					allOutages.Add(new Outage
 					{
 						TagName = "PREDICTED",
-						SatelliteVehicleId = predictedOutage.SatelliteVehicleId,
-						SatelliteVehicleNumber = predictedOutage.SatelliteVehicleNumber,
+						SpaceVehicleId = predictedOutage.SatelliteVehicleId,
+						SpaceVehicleNumber = predictedOutage.SatelliteVehicleNumber,
 						Name = predictedOutage.Name,
 						Type = predictedOutage.Type,
 						Reference = predictedOutage.Reference,

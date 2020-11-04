@@ -14,8 +14,8 @@ function loadList() {
         },
         "columns": [
             { data: "tagName" },
-            { data: "satelliteVehicleId" },
-            { data: "satelliteVehicleNumber" },
+            { data: "spaceVehicleId" },
+            { data: "spaceVehicleNumber" },
             { data: "startTime" },
             { data: "endTime" },
             { data: "type" },
