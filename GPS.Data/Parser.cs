@@ -108,20 +108,30 @@ namespace GPS.Data
         {
             try
             {
-                List<Outage> allOutages = new List<Outage>
-            {
-                new Outage
-                {
-                    TagName = "Creation",
-                    StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
-                },
+                //Create the list of all outages
+                List<Outage> allOutages;
 
-                new Outage
+                //If the creation and reference tags are valid, add them to the list of all outages. Otherwise, simply create the list for future reference.
+                if (ValidateObj.ValidateCreation(Outages.Creation) && ValidateObj.ValidateReference(Outages.Reference))
                 {
-                    TagName = "Reference",
-                    StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
+                    allOutages = new List<Outage>{
+                    new Outage
+                    {
+                        TagName = "Creation",
+                        StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
+                    },
+
+                    new Outage
+                    {
+                        TagName = "Reference",
+                        StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
+                    }
+                    };
                 }
-            };
+                else
+                {
+                    allOutages = new List<Outage>();
+                }
 
                 //Populate the AllOutages List
                 foreach (Historical historicalOutage in Outages.HistoricalOutages)
@@ -133,9 +143,6 @@ namespace GPS.Data
                         _errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
                         continue;
                     }
-
-                    //TODO: This is where the error log message will go once we figure out what that's all about.
-
 
                     allOutages.Add(new Outage
                     {

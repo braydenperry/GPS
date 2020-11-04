@@ -28,7 +28,7 @@ namespace GPS.Test
         [Fact]
         public void CheckFileExists()
         {
-            Assert.Equal("2020", _parser.Outages.Creation.Year);
+            Assert.Equal("NAN", _parser.Outages.Creation.Year);
             Assert.Equal("226", _parser.Outages.Creation.DayOfYear);
             Assert.Equal("12", _parser.Outages.Creation.Hour);
             Assert.Equal("55", _parser.Outages.Creation.Minute);

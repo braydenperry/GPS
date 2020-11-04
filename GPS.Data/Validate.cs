@@ -9,22 +9,65 @@ namespace GPS.Data
 	public class Validate
 	{
 		DateTime CurrentTime = DateTime.UtcNow;
+
+		/// <summary>
+		/// Validate for the creation attribute of the .sof file.
+		/// </summary>
+		/// <param name="creation"></param>
+		/// <returns></returns>
+		public bool ValidateCreation(Creation creation)
+        {
+			//Verify that they are actually numbers.
+			if (!(IsNumeric(creation.Year)
+			&& IsNumeric(creation.DayOfYear)
+			&& IsNumeric(creation.Hour)
+			&& IsNumeric(creation.Minute)
+			&& IsNumeric(creation.Second)
+			))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Validate for the reference attribute of the .sof file.
+		/// </summary>
+		/// <param name="creation"></param>
+		/// <returns></returns>
+		public bool ValidateReference(Reference reference)
+		{
+			//Verify that they are actually numbers.
+			if (!(IsNumeric(reference.Year)
+			&& IsNumeric(reference.DayOfYear)
+			&& IsNumeric(reference.Hour)
+			&& IsNumeric(reference.Minute)
+			&& IsNumeric(reference.Second)
+			))
+			{
+				return false;
+			}
+
+			return true;
+		}
+
 		public bool ValidateHistorical(Historical outage)
 		{
 			//Validate the following are numbers
-			if (!(isNumeric(outage.Reference)
-				&& isNumeric(outage.SatelliteVehicleId)
-				&& isNumeric(outage.SatelliteVehicleNumber)
-				&& isNumeric(outage.StartYear)
-				&& isNumeric(outage.StartDayOfYear)
-				&& isNumeric(outage.StartHour)
-				&& isNumeric(outage.StartMinute)
-				&& isNumeric(outage.StartSecond)
-				&& isNumeric(outage.EndYear)
-				&& isNumeric(outage.EndDayOfYear)
-				&& isNumeric(outage.EndHour)
-				&& isNumeric(outage.EndMinute)
-				&& isNumeric(outage.EndSecond)
+			if (!(IsNumeric(outage.Reference)
+				&& IsNumeric(outage.SatelliteVehicleId)
+				&& IsNumeric(outage.SatelliteVehicleNumber)
+				&& IsNumeric(outage.StartYear)
+				&& IsNumeric(outage.StartDayOfYear)
+				&& IsNumeric(outage.StartHour)
+				&& IsNumeric(outage.StartMinute)
+				&& IsNumeric(outage.StartSecond)
+				&& IsNumeric(outage.EndYear)
+				&& IsNumeric(outage.EndDayOfYear)
+				&& IsNumeric(outage.EndHour)
+				&& IsNumeric(outage.EndMinute)
+				&& IsNumeric(outage.EndSecond)
 				))
 			{
 				return false;
@@ -75,19 +118,19 @@ namespace GPS.Data
 			{
 				endYearExists = true;
 				//Validate the following are numbers
-				if (!(isNumeric(outage.Reference)
-					&& isNumeric(outage.SatelliteVehicleId)
-					&& isNumeric(outage.SatelliteVehicleNumber)
-					&& isNumeric(outage.StartYear)
-					&& isNumeric(outage.StartDayOfYear)
-					&& isNumeric(outage.StartHour)
-					&& isNumeric(outage.StartMinute)
-					&& isNumeric(outage.StartSecond)
-					&& isNumeric(outage.EndYear)
-					&& isNumeric(outage.EndDayOfYear)
-					&& isNumeric(outage.EndHour)
-					&& isNumeric(outage.EndMinute)
-					&& isNumeric(outage.EndSecond)
+				if (!(IsNumeric(outage.Reference)
+					&& IsNumeric(outage.SatelliteVehicleId)
+					&& IsNumeric(outage.SatelliteVehicleNumber)
+					&& IsNumeric(outage.StartYear)
+					&& IsNumeric(outage.StartDayOfYear)
+					&& IsNumeric(outage.StartHour)
+					&& IsNumeric(outage.StartMinute)
+					&& IsNumeric(outage.StartSecond)
+					&& IsNumeric(outage.EndYear)
+					&& IsNumeric(outage.EndDayOfYear)
+					&& IsNumeric(outage.EndHour)
+					&& IsNumeric(outage.EndMinute)
+					&& IsNumeric(outage.EndSecond)
 					))
 				{
 					return (int)retVal.invalid;
@@ -106,14 +149,14 @@ namespace GPS.Data
 			else
 			{
 				//Validate the following are numbers
-				if (!(isNumeric(outage.Reference)
-					&& isNumeric(outage.SatelliteVehicleId)
-					&& isNumeric(outage.SatelliteVehicleNumber)
-					&& isNumeric(outage.StartYear)
-					&& isNumeric(outage.StartDayOfYear)
-					&& isNumeric(outage.StartHour)
-					&& isNumeric(outage.StartMinute)
-					&& isNumeric(outage.StartSecond)
+				if (!(IsNumeric(outage.Reference)
+					&& IsNumeric(outage.SatelliteVehicleId)
+					&& IsNumeric(outage.SatelliteVehicleNumber)
+					&& IsNumeric(outage.StartYear)
+					&& IsNumeric(outage.StartDayOfYear)
+					&& IsNumeric(outage.StartHour)
+					&& IsNumeric(outage.StartMinute)
+					&& IsNumeric(outage.StartSecond)
 					))
 				{
 					return (int)retVal.invalid;
@@ -140,14 +183,14 @@ namespace GPS.Data
 		public bool ValidateCurrent(Current outage)
 		{
 			//Validate the following are numbers
-			if (!(isNumeric(outage.Reference)
-				&& isNumeric(outage.SatelliteVehicleId)
-				&& isNumeric(outage.SatelliteVehicleNumber)
-				&& isNumeric(outage.StartYear)
-				&& isNumeric(outage.StartDayOfYear)
-				&& isNumeric(outage.StartHour)
-				&& isNumeric(outage.StartMinute)
-				&& isNumeric(outage.StartSecond)
+			if (!(IsNumeric(outage.Reference)
+				&& IsNumeric(outage.SatelliteVehicleId)
+				&& IsNumeric(outage.SatelliteVehicleNumber)
+				&& IsNumeric(outage.StartYear)
+				&& IsNumeric(outage.StartDayOfYear)
+				&& IsNumeric(outage.StartHour)
+				&& IsNumeric(outage.StartMinute)
+				&& IsNumeric(outage.StartSecond)
 				))
 			{
 				return false;
@@ -177,7 +220,7 @@ namespace GPS.Data
 		/// </summary>
 		/// <param name="s"></param>
 		/// <returns></returns>
-		private bool isNumeric(string s)
+		private bool IsNumeric(string s)
 		{
 			return int.TryParse(s, out int n);
 		}
