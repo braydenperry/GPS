@@ -30,6 +30,11 @@ function loadList() {
 }
 
 
+
+/*
+ *Below is the old data-table.js code that was previously working.
+ *With this code included everything continues to function properly except for the dropdown menus
+*/
 $('.mydatatable').ready(function () {
 
     $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
@@ -38,10 +43,12 @@ $('.mydatatable').ready(function () {
         $(this).html('<input type="text" placeholder="Search" />');
     });
 
-    localDataTable.columns().indexes().flatten().each(function (i) {
-        var column = localDataTable.column(i);
+    localDataTable.columns().indexes().flatten().each(function (column_index) {
+        var column = localDataTable.column(column_index);
+        const Tag_Name = 0;
+        const Type = 5;
         // Dropdown columns ('Tag Name' and 'Type')
-        if (i === 0 | i === 5) {
+        if (column_index === Tag_Name | column_index === Type) {
             var select = $('<select><option value=""></option></select>')
                 .appendTo($(column.footer()).empty())
                 .on('change', function () {
