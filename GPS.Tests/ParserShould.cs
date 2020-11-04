@@ -100,14 +100,14 @@ namespace GPS.Test
 		[Fact]
 		public void CheckFirstHistoricalTag()
 		{
-			Assert.Equal("HISTORICAL", _allOutages[0].TagName);
-			Assert.Equal("8", _allOutages[0].SatelliteVehicleId);
-			Assert.Equal("38", _allOutages[0].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[0].Name);
-			Assert.Equal("UNUSABLE", _allOutages[0].Type);
-			Assert.Equal("1998006", _allOutages[0].Reference);
-			Assert.True(GpsIsFile.ToDateTime(1998, 009, 09, 55, 00) == _allOutages[0].StartTime);
-			Assert.True(GpsIsFile.ToDateTime(1998, 009, 22, 56, 00) == _allOutages[0].EndTime);
+			Assert.Equal("HISTORICAL", _allOutages[2].TagName);
+			Assert.Equal("8", _allOutages[2].SatelliteVehicleId);
+			Assert.Equal("38", _allOutages[2].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[2].Name);
+			Assert.Equal("UNUSABLE", _allOutages[2].Type);
+			Assert.Equal("1998006", _allOutages[2].Reference);
+			Assert.True(GpsIsFile.ToDateTime(1998, 009, 09, 55, 00) == _allOutages[2].StartTime);
+			Assert.True(GpsIsFile.ToDateTime(1998, 009, 22, 56, 00) == _allOutages[2].EndTime);
 		}
 
 		/// <summary>
@@ -116,14 +116,14 @@ namespace GPS.Test
 		[Fact]
 		public void CheckSecondHistoricalTag()
 		{
-			Assert.Equal("HISTORICAL", _allOutages[1].TagName);
-			Assert.Equal("24", _allOutages[1].SatelliteVehicleId);
-			Assert.Equal("24", _allOutages[1].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[1].Name);
-			Assert.Equal("FCSTSUMM", _allOutages[1].Type);
-			Assert.Equal("1998014", _allOutages[1].Reference);
-			Assert.True(GpsIsFile.ToDateTime(1998, 021, 01, 27, 00) == _allOutages[1].StartTime);
-			Assert.True(GpsIsFile.ToDateTime(1998, 021, 03, 42, 00) == _allOutages[1].EndTime);
+			Assert.Equal("HISTORICAL", _allOutages[3].TagName);
+			Assert.Equal("24", _allOutages[3].SatelliteVehicleId);
+			Assert.Equal("24", _allOutages[3].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[3].Name);
+			Assert.Equal("FCSTSUMM", _allOutages[3].Type);
+			Assert.Equal("1998014", _allOutages[3].Reference);
+			Assert.True(GpsIsFile.ToDateTime(1998, 021, 01, 27, 00) == _allOutages[3].StartTime);
+			Assert.True(GpsIsFile.ToDateTime(1998, 021, 03, 42, 00) == _allOutages[3].EndTime);
 		}
 
 		/// <summary>
@@ -132,13 +132,13 @@ namespace GPS.Test
 		[Fact]
 		public void CheckFirstCurrentTag()
 		{
-			Assert.Equal("CURRENT", _allOutages[2].TagName);
-			Assert.Equal("14", _allOutages[2].SatelliteVehicleId);
-			Assert.Equal("41", _allOutages[2].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[2].Name);
-			Assert.Equal("FCSTUUFN", _allOutages[2].Type);
-			Assert.Equal("2020031", _allOutages[2].Reference);
-			Assert.True(GpsIsFile.ToDateTime(2020, 191, 18, 00, 00) == _allOutages[2].StartTime);
+			Assert.Equal("CURRENT", _allOutages[4].TagName);
+			Assert.Equal("14", _allOutages[4].SatelliteVehicleId);
+			Assert.Equal("41", _allOutages[4].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[4].Name);
+			Assert.Equal("FCSTUUFN", _allOutages[4].Type);
+			Assert.Equal("2020031", _allOutages[4].Reference);
+			Assert.True(GpsIsFile.ToDateTime(2020, 191, 18, 00, 00) == _allOutages[4].StartTime);
 		}
 
 		/// <summary>
@@ -147,13 +147,13 @@ namespace GPS.Test
 		[Fact]
 		public void CheckSecondCurrentTag()
 		{
-			Assert.Equal("CURRENT", _allOutages[3].TagName);
-			Assert.Equal("23", _allOutages[3].SatelliteVehicleId);
-			Assert.Equal("76", _allOutages[3].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[3].Name);
-			Assert.Equal("UNUSUFN", _allOutages[3].Type);
-			Assert.Equal("2020033", _allOutages[3].Reference);
-			Assert.True(GpsIsFile.ToDateTime(2020, 182, 20, 10, 00) == _allOutages[3].StartTime);
+			Assert.Equal("CURRENT", _allOutages[5].TagName);
+			Assert.Equal("23", _allOutages[5].SatelliteVehicleId);
+			Assert.Equal("76", _allOutages[5].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[5].Name);
+			Assert.Equal("UNUSUFN", _allOutages[5].Type);
+			Assert.Equal("2020033", _allOutages[5].Reference);
+			Assert.True(GpsIsFile.ToDateTime(2020, 182, 20, 10, 00) == _allOutages[5].StartTime);
 		}
 
 		/// <summary>
@@ -162,13 +162,13 @@ namespace GPS.Test
 		[Fact]
 		public void CheckFirstPredictedTag()
 		{
-			Assert.Equal("PREDICTED", _allOutages[4].TagName);
-			Assert.Equal("23", _allOutages[4].SatelliteVehicleId);
-			Assert.Equal("60", _allOutages[4].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[4].Name);
-			Assert.Equal("FCSTUUFN", _allOutages[4].Type);
-			Assert.Equal("2020010", _allOutages[4].Reference);
-			Assert.True(GpsIsFile.ToDateTime(2020, 069, 15, 30, 00) == _allOutages[4].StartTime);
+			Assert.Equal("PREDICTED", _allOutages[6].TagName);
+			Assert.Equal("23", _allOutages[6].SatelliteVehicleId);
+			Assert.Equal("60", _allOutages[6].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[6].Name);
+			Assert.Equal("FCSTUUFN", _allOutages[6].Type);
+			Assert.Equal("2020010", _allOutages[6].Reference);
+			Assert.True(GpsIsFile.ToDateTime(2020, 069, 15, 30, 00) == _allOutages[6].StartTime);
 		}
 
 		/// <summary>
@@ -177,14 +177,14 @@ namespace GPS.Test
 		[Fact]
 		public void CheckSecondPredictedTag()
 		{
-			Assert.Equal("PREDICTED", _allOutages[5].TagName);
-			Assert.Equal("25", _allOutages[5].SatelliteVehicleId);
-			Assert.Equal("62", _allOutages[5].SatelliteVehicleNumber);
-			Assert.Equal("NANU", _allOutages[5].Name);
-			Assert.Equal("FCSTMX", _allOutages[5].Type);
-			Assert.Equal("2020045", _allOutages[5].Reference);
-			Assert.True(GpsIsFile.ToDateTime(2020, 275, 19, 00, 00) == _allOutages[5].StartTime);
-			Assert.True(GpsIsFile.ToDateTime(2020, 277, 19, 00, 00) == _allOutages[5].EndTime);
+			Assert.Equal("PREDICTED", _allOutages[7].TagName);
+			Assert.Equal("25", _allOutages[7].SatelliteVehicleId);
+			Assert.Equal("62", _allOutages[7].SatelliteVehicleNumber);
+			Assert.Equal("NANU", _allOutages[7].Name);
+			Assert.Equal("FCSTMX", _allOutages[7].Type);
+			Assert.Equal("2020045", _allOutages[7].Reference);
+			Assert.True(GpsIsFile.ToDateTime(2020, 275, 19, 00, 00) == _allOutages[7].StartTime);
+			Assert.True(GpsIsFile.ToDateTime(2020, 277, 19, 00, 00) == _allOutages[7].EndTime);
 		}
 	}
 }
