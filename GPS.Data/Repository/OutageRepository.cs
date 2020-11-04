@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GPS.Data.ParserObjects;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,18 @@ namespace GPS.Data
 
         private readonly object SOFFileLock = new object();
 
+        private readonly string _solutionDirectory;
+
+        private readonly string _sofPath;
+
         public OutageRepository()
         {
+            
             lock (SOFFileLock){
                 _parser = new Parser();
+                _allOutages = _parser.PopulateObjectsFromSof();
+                _solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+                _sofPath = Path.Combine(_solutionDirectory, "GPS.Data\\SOF\\current.sof");
             }
 
             if (_parser.Outages != null)
@@ -37,10 +46,10 @@ namespace GPS.Data
             
             lock (SOFFileLock) { 
 
-                if (File.Exists("\\SOF\\current.sof")) // Make sure the SOF file exists.
+                if (File.Exists(_sofPath)) // Make sure the SOF file exists.
                 {
                     // If it does, delete it.
-                    File.Delete("\\SOF\\current.sof");
+                    File.Delete(_sofPath);
                 }
 
             }
@@ -65,14 +74,11 @@ namespace GPS.Data
 
                 if (file.Length > 0) // Make sure there's actually a file being uploaded.
                 {
-                    // Get file path for new file being uploaded.
-                    string executionFolder = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-                    string sofPath = Path.Combine(executionFolder, "SOF/current.sof");
 
-                    if (ValidExtension(sofPath)) // Make sure new file being uploaded has .sof extension.
+                    if (ValidExtension(_sofPath)) // Make sure new file being uploaded has .sof extension.
                     {
                         // Create or overwrite a file at the secified path.  
-                        using FileStream fileStream = File.Create(sofPath);
+                        using FileStream fileStream = File.Create(_sofPath);
                         file.CopyTo(fileStream);
                         fileStream.Flush();
                     }

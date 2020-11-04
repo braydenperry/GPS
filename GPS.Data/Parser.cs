@@ -106,35 +106,48 @@ namespace GPS.Data
 		/// </returns>
 		public List<Outage> PopulateObjectsFromSof()
 		{
-			try
+			List<Outage> allOutages = new List<Outage>
 			{
-				//Populate the AllOutages List
-				List<Outage> allOutages = new List<Outage>();
-				foreach (Historical historicalOutage in Outages.HistoricalOutages)
+				new Outage
 				{
-					bool valid = ValidateObj.ValidateHistorical(historicalOutage);
-					if (!valid)
-					{
-						//If there is an error, log it and continue with the next iteration of the loop
-						_errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
-						continue;
-					}
+					TagName = "Creation",
+					StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
+				},
+
+				new Outage
+				{
+					TagName = "Reference",
+					StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
+				}
+			};
+
+			//Populate the AllOutages List
+			List<Outage> allOutages = new List<Outage>();
+			foreach (Historical historicalOutage in Outages.HistoricalOutages)
+			{
+				bool valid = ValidateObj.ValidateHistorical(historicalOutage);
+				if (!valid)
+                {
+					//If there is an error, log it and continue with the next iteration of the loop
+					_errorLog.Add("The Historical tag with the reference number " + historicalOutage.Reference + " is invalid and was not added to the all outages list");
+					continue;
+				}
 					
-					//TODO: This is where the error log message will go once we figure out what that's all about.
+				//TODO: This is where the error log message will go once we figure out what that's all about.
 				
 
-					allOutages.Add(new Outage
-					{
-						TagName = "HISTORICAL",
-						SatelliteVehicleId = historicalOutage.SatelliteVehicleId,
-						SatelliteVehicleNumber = historicalOutage.SatelliteVehicleNumber,
-						Name = historicalOutage.Name,
-						Type = historicalOutage.Type,
-						Reference = historicalOutage.Reference,
-						StartTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.StartYear), int.Parse(historicalOutage.StartDayOfYear), int.Parse(historicalOutage.StartHour), int.Parse(historicalOutage.StartMinute), int.Parse(historicalOutage.StartSecond)),
-						EndTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.EndYear), int.Parse(historicalOutage.EndDayOfYear), int.Parse(historicalOutage.EndHour), int.Parse(historicalOutage.EndMinute), int.Parse(historicalOutage.EndSecond))
-					});
-				}
+				allOutages.Add(new Outage
+				{
+					TagName = "HISTORICAL",
+					SatelliteVehicleId = historicalOutage.SatelliteVehicleId,
+					SatelliteVehicleNumber = historicalOutage.SatelliteVehicleNumber,
+					Name = historicalOutage.Name,
+					Type = historicalOutage.Type,
+					Reference = historicalOutage.Reference,
+					StartTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.StartYear), int.Parse(historicalOutage.StartDayOfYear), int.Parse(historicalOutage.StartHour), int.Parse(historicalOutage.StartMinute), int.Parse(historicalOutage.StartSecond)),
+					EndTime = GpsIsFile.ToDateTime(int.Parse(historicalOutage.EndYear), int.Parse(historicalOutage.EndDayOfYear), int.Parse(historicalOutage.EndHour), int.Parse(historicalOutage.EndMinute), int.Parse(historicalOutage.EndSecond))
+				});
+			}
 
 				foreach (Current currentOutage in Outages.CurrentOutages)
 				{
