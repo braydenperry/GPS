@@ -13,6 +13,7 @@ $(document).ready(function () {
 
 function loadList() {
     localDataTable = $('#DT_load').DataTable({
+        lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
         "ajax": {
             "url": "/api/queryoutages",
             "type": "GET",
