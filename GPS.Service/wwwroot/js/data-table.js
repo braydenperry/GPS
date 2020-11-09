@@ -1,11 +1,18 @@
-﻿var dataTable;
+﻿var localDataTable;
+const Tag_Name = 0;
+const ID = 1;
+const SVN = 2; 
+const Start_Time = 3;
+const End_Time = 4;
+const Type = 5;
+const Reference = 6;
 
 $(document).ready(function () {
     loadList();
 });
 
 function loadList() {
-    dataTable = $('#DT_load').DataTable({
+    localDataTable = $('#DT_load').DataTable({
         "ajax": {
             "url": "/api/queryoutages",
             "type": "GET",
@@ -16,73 +23,60 @@ function loadList() {
             { data: "tagName" },
             { data: "satelliteVehicleId" },
             { data: "satelliteVehicleNumber" },
-            { data: "startTime" },
-            { data: "endTime" },
+            //copied directly from Brayden's code, but it is not sorting correctly
+            { data: "startTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
+            { data: "endTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
             { data: "type" },
             { data: "reference" }
         ],
         "language": {
             "emptyTable": "no data found."
         },
-        "width": "100%"
+        "width": "100%",
+        "order": [[6, 'asc']],
+
+        initComplete: function () {
+            this.api().columns([Tag_Name, Type]).every(function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+
+            this.api().columns([ID, SVN, Start_Time, Type]).every(function () {
+                localDataTable.columns().every(function () {
+                var column = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        if (column.search(val ? '^' + val : '', true, false)) {
+                            column.draw();
+                        }
+                    })
+                })
+            });
+        }
     });
 }
 
+$('.mydatatable').ready(function () {
 
+    $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
 
-//$('.mydatatable').ready(function () {
-//    //implements 'ultimate date/time sorting' plugin: https://datatables.net/blog/2014-12-18
-//    $.fn.dataTable.moment('M/D/YYYY HH:mm:ss');
-
-//    let table = $('.mydatatable').DataTable({
-//        lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
-//        //searching: false
-//    });
-
-//    //searching box
-//    $('.mydatatable tfoot th').each(function () {
-//        $(this).html('<input type="text" placeholder="Search" />');
-//    });
-
-//    table.columns().indexes().flatten().each(function (i) {
-//        var column = table.column(i);
-//        // Dropdown columns ('Tag Name' and 'Type')
-//        if (i === 0 | i === 5) {
-//            var select = $('<select><option value=""></option></select>')
-//                .appendTo($(column.footer()).empty())
-//                .on('change', function () {
-//                    // Escape the expression so we can perform a regex match
-//                    var val = $.fn.dataTable.util.escapeRegex(
-//                        $(this).val()
-//                    );
-
-//                    column
-//                        .search(val ? '^' + val + '$' : '', true, false)
-//                        .draw();
-//                });
-
-//            column.data().unique().sort().each(function (d, j) {
-//                select.append('<option value="' + d + '">' + d + '</option>')
-//            });
-//        }
-//        // Search columns
-//        else {
-//            table.columns().every(function () {
-//                var that = this;
-//                $('input', this.footer()).on('keyup change', function () {
-//                    //create a special variable using .escapeRegex function
-//                    //see https://datatables.net/reference/api/$.fn.dataTable.util.escapeRegex()
-//                    var val = $.fn.dataTable.util.escapeRegex(
-//                        $(this).val()
-//                    );
-//                    //"val ? '^' + val : ''" expression functions as the string argument in 'search()' function
-//                    //'^' in a regular expression means the tested string must START with the respective string
-//                    if (that.search(val ? '^' + val : '', true, false)) {
-//                        that.draw();
-//                    }
-//                })
-//            })
-//        }
-//    });
-
-//});
+    $('.mydatatable tfoot th').each(function () {
+        $(this).html('<input type="text" placeholder="Search" />');
+    });
+});
