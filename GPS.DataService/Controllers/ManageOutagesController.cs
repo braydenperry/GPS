@@ -11,7 +11,7 @@ namespace GPS.DataService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ManageOutagesController : ControllerBase
+    public class ManageOutagesController : Controller
     {
         #region Properties
         public readonly IOutageRepository _outageRepository;
@@ -26,33 +26,42 @@ namespace GPS.DataService.Controllers
 
         #region HTTP Methods
         [HttpPost]
-        public string Post(IFormFile file)
+        public IActionResult Post(IFormFile file)
         {
 
             try
             {
-                _outageRepository.Upload(file);
-                return "File uploaded";
+
+                if (file != null)
+                {
+                    _outageRepository.Upload(file.OpenReadStream());
+                    return StatusCode(202, "File Uploaded");
+                }
+                else
+                {
+                    throw new ArgumentNullException();
+                }
+                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return ex.Message.ToString();
+                return StatusCode(400);
             }
 
         }
 
         [HttpDelete]
-        public string Delete()
+        public IActionResult Delete()
         {
 
             try
             {
                 _outageRepository.Delete();
-                return "File deleted";
+                return StatusCode(202, "File Deleted");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return ex.Message.ToString();
+                return StatusCode(400);
             }
 
         }

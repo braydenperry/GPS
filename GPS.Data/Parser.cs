@@ -49,6 +49,12 @@ namespace GPS.Data
             }
         }
 
+        public Parser(Stream test)
+        {
+            Serializer = new XmlSerializer(typeof(GpsIsFile));
+            Outages = (GpsIsFile)Serializer.Deserialize(test);
+        }
+
         /// <summary>
         /// Overloaded constructor that will accept a file path for testing's sake.
         /// </summary>

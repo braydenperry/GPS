@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GPS.Data;
+﻿using GPS.Data;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GPS.DataService.Controllers
 {
@@ -21,29 +19,36 @@ namespace GPS.DataService.Controllers
         }
         #endregion
 
+        #region HTTP Methods
         [HttpGet]
         public IActionResult Get()
         {
+
             try
             {
-                if (_outageRepository.Get() == null)
-                {
-                    throw new ArgumentException("There were no outages: Possible FileNotFound Exception");
-                }
-                else
-                {
-                    return Json(_outageRepository.Get());
-                }
-            }catch(Exception ex)
+                return Json(_outageRepository.Get());
+            }
+            catch (Exception)
             {
                 return StatusCode(404);
             }
+
         }
 
         [HttpGet("{tagName}")]
         public IActionResult Get(string tagName)
         {
-            return Json(_outageRepository.Get().Where(o => o.TagName == tagName.ToUpper()));
+
+            try
+            {
+                return Json(_outageRepository.Get(tagName));
+            }
+            catch (Exception)
+            {
+                return StatusCode(404);
+            }
+
         }
+        #endregion
     }
 }
