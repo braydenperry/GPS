@@ -49,10 +49,10 @@ namespace GPS.Data
             }
         }
 
-        public Parser(Stream test)
+        public Parser(Stream stream)
         {
             Serializer = new XmlSerializer(typeof(GpsIsFile));
-            Outages = (GpsIsFile)Serializer.Deserialize(test);
+            Outages = (GpsIsFile)Serializer.Deserialize(stream);
         }
 
         /// <summary>
