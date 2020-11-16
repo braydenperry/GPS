@@ -96,15 +96,6 @@ namespace GPS.Data
         }
 
         /// <summary>
-        /// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
-        /// </summary>
-        private enum retVal
-        {
-            validWithEndTime = 1,
-            validNoEndTime = 2,
-            invalid = 3
-        }
-        /// <summary>
         /// Takes a .sof and populates the classes with the information included therein
         /// </summary>
         /// <returns>
@@ -121,17 +112,17 @@ namespace GPS.Data
                 if (ValidateObj.ValidateCreation(Outages.Creation) && ValidateObj.ValidateReference(Outages.Reference))
                 {
                     allOutages = new List<Outage>{
-                    new Outage
-                    {
-                        TagName = "Creation",
-                        StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
-                    },
+                        new Outage
+                        {
+                            TagName = "Creation",
+                            StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Creation.Year), int.Parse(Outages.Creation.DayOfYear), int.Parse(Outages.Creation.Hour), int.Parse(Outages.Creation.Minute), int.Parse(Outages.Creation.Second))
+                        },
 
-                    new Outage
-                    {
-                        TagName = "Reference",
-                        StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
-                    }
+                        new Outage
+                        {
+                            TagName = "Reference",
+                            StartTime = GpsIsFile.ToDateTime(int.Parse(Outages.Reference.Year), int.Parse(Outages.Reference.DayOfYear), int.Parse(Outages.Reference.Hour), int.Parse(Outages.Reference.Minute), int.Parse(Outages.Reference.Second))
+                        }
                     };
                 }
                 else
@@ -187,9 +178,9 @@ namespace GPS.Data
 
                 foreach (Predicted predictedOutage in Outages.PredictedOutages)
                 {
-                    int valid = ValidateObj.ValidatePredicted(predictedOutage);
+                    RetVal valid = ValidateObj.ValidatePredicted(predictedOutage);
                     //if invalid
-                    if (valid == (int)retVal.invalid)
+                    if (valid == RetVal.invalid)
                     {
                         //If there is an error, log it and continue with the next iteration of the loop
                         _errorLog.Add("The Predicted tag with the reference number " + predictedOutage.Reference + " is invalid and was not added to the all outages list");
@@ -197,7 +188,7 @@ namespace GPS.Data
                     }
 
                     //if end time exists
-                    if (valid == (int)retVal.validWithEndTime)
+                    if (valid == RetVal.validWithEndTime)
                     {
                         allOutages.Add(new Outage
                         {
@@ -212,7 +203,7 @@ namespace GPS.Data
                         });
                     }
                     //if end time does NOT exist
-                    if (valid == (int)retVal.validNoEndTime)
+                    if (valid == RetVal.validNoEndTime)
                     {
                         allOutages.Add(new Outage
                         {
