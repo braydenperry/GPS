@@ -20,23 +20,24 @@ namespace GPS.Data
         public OutageRepository()
         {
 
-            lock (SOFFileLock)
-            {
-                _parser = new Parser();
-                AllOutages = _parser.PopulateObjectsFromSof();
-                _solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-                _sofPath = Path.Combine(_solutionDirectory, "GPS.Data\\SOF\\current.sof");
-            }
+            _parser = new Parser();
+            _solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
+            _sofPath = Path.Combine(_solutionDirectory, "GPS.Data\\SOF\\current.sof");
 
             if (_parser.Outages != null)
             {
-                AllOutages = _parser.PopulateObjectsFromSof();
+
+                lock (SOFFileLock)
+                {
+                    AllOutages = _parser.PopulateObjectsFromSof();
+                }
 
             }
             else
             {
-                //Send an error code because a file could not be found to pull outage data from
+                throw new Exception();
             }
+
         }
 
         public void Delete()
