@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GPS.Data;
-using Microsoft.AspNetCore.Hosting;
+﻿using GPS.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GPS.DataService.Controllers
 {
@@ -41,7 +37,7 @@ namespace GPS.DataService.Controllers
                 {
                     throw new ArgumentNullException();
                 }
-                
+
             }
             catch (Exception)
             {
