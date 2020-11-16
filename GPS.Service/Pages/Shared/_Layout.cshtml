@@ -1,61 +1,64 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GPS Satellite Outages</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/responsive.bootstrap4.min.css" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - GPS Satellite Outages</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/dataTables.bootstrap4.min.css" />
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/responsive.bootstrap4.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">GPS Satellite Outages</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-page="/Index">All Outages</a>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-page="/SOFDownload">Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-page="/Buttons">Upload</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container">
+				<a class="navbar-brand" asp-area="" asp-page="/Index">GPS Satellite Outages</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-muted" href="~/SOF/SOFDownloadFile.sof" download="CurrentSOF.sof">
+								Download SOF
+							</a>
+						</li>
+						<li class="nav-item">
+							<label class="nav-link text-muted" for="my-file-selector" style="cursor:pointer">
+								<input id="my-file-selector" type="file" name="file" style="display:none" onchange="$('#upload-file-info').html(this.files[0].name)">
+								Upload
+							</label>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-    <main role="main" class="pb-3">
-        <div class="container-fluid">
-            @RenderBody()
-        </div>
-    </main>
+	<main role="main" class="pb-3">
+		<div class="container-fluid">
+			@RenderBody()
+		</div>
+	</main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - GPS.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2020 - GPS.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+		</div>
+	</footer>
 
-    <script src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
-    <script src="~/lib/cloudflare/popper.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="~/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/js/dataTables.responsive.min.js"></script>
-    <script src="~/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/lib/cloudflare/moment.min.js"></script>
-    <script src="~/js/datetime-moment.js"></script>
+	<script src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
+	<script src="~/lib/cloudflare/popper.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="~/js/jquery.dataTables.min.js"></script>
+	<script src="~/js/dataTables.bootstrap4.min.js"></script>
+	<script src="~/js/dataTables.responsive.min.js"></script>
+	<script src="~/js/responsive.bootstrap4.min.js"></script>
+	<script src="~/lib/cloudflare/moment.min.js"></script>
+	<script src="~/js/datetime-moment.js"></script>
 
-    @RenderSection("Scripts", required: false)
+	@RenderSection("Scripts", required: false)
 </body>
 </html>
