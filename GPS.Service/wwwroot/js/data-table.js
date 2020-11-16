@@ -24,9 +24,15 @@ function loadList() {
             { data: "tagName" },
             { data: "satelliteVehicleId" },
             { data: "satelliteVehicleNumber" },
-            //copied directly from Brayden's code, but it is not sorting correctly
             { data: "startTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
-            { data: "endTime", render: function (data) { return moment(data).format('M/D/YYYY HH:mm:ss'); } },
+            {
+                data: "endTime", render: function (data) {
+                    let momentEndDate = moment(data).format('M/D/YYYY HH:mm:ss');
+                    let endDate = (momentEndDate === 'Invalid date') ? '' : momentEndDate;
+                    
+                    return endDate;
+                }
+            },
             { data: "type" },
             { data: "reference" }
         ],
