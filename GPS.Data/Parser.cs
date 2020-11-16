@@ -93,37 +93,6 @@ namespace GPS.Data
                 _reader.Close();
             }
 
-            // try
-            // {
-            //     if (filePath == "validTest.sof")
-            //     {
-            //         // Gets the path of the solution
-            //         string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            //         // Combines the path of the working directory with the relative path to the SOF file
-            //         string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\validTest.sof");
-            // 
-            //         // Deserializes the .sof file and populates each of the classes
-            //         Serializer = new XmlSerializer(typeof(GpsIsFile));
-            //         using Stream reader = new FileStream(sofPath, FileMode.Open);
-            //         Outages = (GpsIsFile)Serializer.Deserialize(reader);
-            //     }
-            //     else if (filePath == "invalidTest.sof")
-            //     {
-            //         // Gets the path of the solution
-            //         string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
-            //         // Combines the path of the working directory with the relative path to the SOF file
-            //         string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\invalidTest.sof");
-            // 
-            //         // Deserializes the .sof file and populates each of the classes
-            //         Serializer = new XmlSerializer(typeof(GpsIsFile));
-            //         using Stream reader = new FileStream(sofPath, FileMode.Open);
-            //         Outages = (GpsIsFile)Serializer.Deserialize(reader);
-            //     }
-            // }
-            // catch (Exception ex)
-            // {
-            //     _errorLog.Add(ex.ToString());
-            // }
         }
 
         /// <summary>
