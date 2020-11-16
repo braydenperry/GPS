@@ -1,10 +1,7 @@
-﻿using GPS.Data.ParserObjects;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace GPS.Data
 {
@@ -12,7 +9,7 @@ namespace GPS.Data
     {
         private readonly Parser _parser;
 
-        private readonly List<Outage> _allOutages;
+        private IEnumerable<Outage> AllOutages;
 
         private readonly object SOFFileLock = new object();
 
@@ -22,17 +19,18 @@ namespace GPS.Data
 
         public OutageRepository()
         {
-            
-            lock (SOFFileLock){
+
+            lock (SOFFileLock)
+            {
                 _parser = new Parser();
-                _allOutages = _parser.PopulateObjectsFromSof();
+                AllOutages = _parser.PopulateObjectsFromSof();
                 _solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
                 _sofPath = Path.Combine(_solutionDirectory, "GPS.Data\\SOF\\current.sof");
             }
 
             if (_parser.Outages != null)
             {
-                    _allOutages = _parser.PopulateObjectsFromSof();
+                AllOutages = _parser.PopulateObjectsFromSof();
 
             }
             else
@@ -43,69 +41,83 @@ namespace GPS.Data
 
         public void Delete()
         {
-            
-            lock (SOFFileLock) { 
 
-                if (File.Exists(_sofPath)) // Make sure the SOF file exists.
+            if (File.Exists(_sofPath))
+            {
+
+                lock (SOFFileLock)
                 {
-                    // If it does, delete it.
                     File.Delete(_sofPath);
+                    AllOutages = null;
                 }
 
-            }
-
-        }
-
-        public List<Outage> Get()
-        {
-
-            lock (SOFFileLock)
-            {
-                return _allOutages;
-            }
-
-        }
-
-        public void Upload(IFormFile file)
-        {
-
-            lock (SOFFileLock)
-            {
-
-                if (file.Length > 0) // Make sure there's actually a file being uploaded.
-                {
-
-                    if (ValidExtension(_sofPath)) // Make sure new file being uploaded has .sof extension.
-                    {
-                        // Create or overwrite a file at the secified path.  
-                        using FileStream fileStream = File.Create(_sofPath);
-                        file.CopyTo(fileStream);
-                        fileStream.Flush();
-                    }
-
-                }
-
-            }
-
-        }
-
-        /// <summary>
-        /// Checks if the extension of a given file path is .sof. 
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        private bool ValidExtension(string filePath)
-        {
-            // Get the extesnion of the provided file path.
-            string extension = Path.GetExtension(filePath);
-
-            if (extension.ToLower() == ".sof") // Make sure the extension is .sof.
-            {
-                return true;
             }
             else
             {
-                return false;
+                throw new Exception();
+            }
+
+        }
+
+        public IEnumerable<Outage> Get()
+        {
+
+            if (AllOutages != null)
+            {
+
+                lock (SOFFileLock)
+                {
+                    return AllOutages;
+                }
+
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+        }
+
+        public IEnumerable<Outage> Get(string tagName)
+        {
+
+            if (AllOutages != null)
+            {
+
+                lock (SOFFileLock)
+                {
+                    return AllOutages.Where(o => o.TagName == tagName.ToUpper());
+                }
+
+            }
+            else
+            {
+                throw new Exception();
+            }
+
+        }
+
+        public void Upload(Stream stream)
+        {
+
+            try
+            {
+                Parser parser = new Parser(stream);
+                AllOutages = parser.PopulateObjectsFromSof();
+
+                var fileStream = File.Create(_sofPath);
+
+                lock (SOFFileLock)
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    stream.CopyTo(fileStream);
+                }
+
+                fileStream.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
         }
