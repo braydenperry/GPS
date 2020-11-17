@@ -26,13 +26,15 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<form method="post" enctype="multipart/form-data" action="api/ManageOutages">
+							<form id="postFile" method="post" enctype="multipart/form-data" action="api/ManageOutages">
 								<label class="nav-link text-muted" for="my-file-selector" style="cursor:pointer">
-									<input class="" id="my-file-selector" type="file" name="file" accept=".sof" style="display:none" 
-											onchange="$('#upload-file-info').html(this.files[0].name); this.form.submit();"/>
+									<input class="" id="my-file-selector" type="file" name="file" accept=".sof" style="display:none"
+										   onchange="$('#upload-file-info').html(this.files[0].name); this.form.submit();" />
 									Upload
 								</label>
 							</form>
+							@*<button onclick="javascript:postFile();" onchange="$('#upload-file-info').html(this.files[0].name);
+																	this.form.submit();">Upload</button>*@
 						</li>
 					</ul>
 				</div>
