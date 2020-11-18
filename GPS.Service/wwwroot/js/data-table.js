@@ -40,6 +40,8 @@ function loadList() {
             "emptyTable": "no data found."
         },
         "width": "100%",
+        bAutoWidth: false,
+        responsive: true,
         "order": [[6, 'asc']],
 
         initComplete: function () {
