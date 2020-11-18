@@ -40,6 +40,8 @@ function loadList() {
             "emptyTable": "no data found."
         },
         "width": "100%",
+        bAutoWidth: false,
+        responsive: true,
         "order": [[6, 'asc']],
 
         initComplete: function () {
@@ -58,11 +60,13 @@ function loadList() {
                     });
 
                 column.data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
+                    if (d != null) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    }
                 });
             });
 
-            this.api().columns([ID, SVN, Start_Time, Type]).every(function () {
+            this.api().columns([ID, SVN, Type]).every(function () {
                 localDataTable.columns().every(function () {
                 var column = this;
                     $('input', this.footer()).on('keyup change', function () {
@@ -75,6 +79,27 @@ function loadList() {
                     })
                 })
             });
+
+            this.api().columns([Start_Time]).every(function () {
+                var column = this;
+                var select = $('<input type="text" class="filterButton" id="startTimeFilterButton">')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        //here is where we will pass the info over to the controller to get the new fields
+                    });
+            });
+
+            this.api().columns([End_Time]).every(function () {
+                var column = this;
+                var select = $('<input type="text" class="filterButton" id="endTimeFilterButton">')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        //here is where we will pass the info over to the controller to get the new fields
+                    });
+            });
+
+            //Make the filter buttons into a daterangepicker.
+            $(".filterButton").daterangepicker();
         }
     });
 }
@@ -86,4 +111,8 @@ $('.mydatatable').ready(function () {
     $('.mydatatable tfoot th').each(function () {
         $(this).html('<input type="text" placeholder="Search" />');
     });
+});
+
+document.getElementById("startTimeFilterButton").addEventListener("click", function () {
+    //window.alert("what");
 });

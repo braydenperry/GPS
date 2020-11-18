@@ -1,6 +1,7 @@
 ﻿using GPS.Data;
 using GPS.Data.ParserObjects;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace GPS.Test
@@ -16,7 +17,10 @@ namespace GPS.Test
         /// </summary>
         public ParserShouldNot()
         {
-            _parser = new Parser("invalidTest.sof");
+            string solutionDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName;
+            string sofPath = Path.Combine(solutionDirectory, "GPS.Data\\SOF\\invalidTest.sof");
+
+            _parser = new Parser(sofPath);
             _allOutages = _parser.PopulateObjectsFromSof();
         }
         /// <summary>

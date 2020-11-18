@@ -1,7 +1,7 @@
 ﻿namespace GPS.Data
 {
     /// <summary>
-    /// Enum for the return values of ValidatePredicted. Couldn't put this in the function for some reason.
+    /// Enum for the return values of ValidatePredicted.
     /// </summary>
     public enum RetVal
     {
