@@ -116,6 +116,8 @@ function loadList() {
                 autoUpdateInput: false,
                 linkedCalendars: false,
                 showDropdowns: true,
+                startDate: "01/01/1987",
+                endDate: "12/31/2020",
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
@@ -126,6 +128,8 @@ function loadList() {
                 autoUpdateInput: false,
                 linkedCalendars: false,
                 showDropdowns: true,
+                startDate: "01/01/1987",
+                endDate: "12/31/20120",
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
