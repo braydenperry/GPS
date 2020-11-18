@@ -93,6 +93,7 @@ body {
 .mydatatable tfoot select {
     max-width: 100%;
     min-height: 30px;
+    text-transform: uppercase;
 }
 
 /*Change max-width to percentage to fit within 'tfoot'*/
@@ -108,3 +109,4 @@ body {
 .mydatatable td {
     text-transform: uppercase;
 }
+
