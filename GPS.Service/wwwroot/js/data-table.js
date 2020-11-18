@@ -82,26 +82,48 @@ function loadList() {
 
             this.api().columns([Start_Time]).every(function () {
                 var column = this;
-                var select = $('<input type="text" class="filterButton" id="startTimeFilterButton">')
+                $('<input type="text" class="filterButton" id="startTimeFilterButton">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
                         //here is where we will pass the info over to the controller to get the new fields
+                        var date_range = $('#startTimeFilterButton').val();
+                        var dates = date_range.split(" - ");
+                        var min = dates[0];
+                        var max = dates[1];
                     });
             });
 
             this.api().columns([End_Time]).every(function () {
                 var column = this;
-                var select = $('<input type="text" class="filterButton" id="endTimeFilterButton">')
+                $('<input type="text" class="filterButton" id="endTimeFilterButton">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
                         //here is where we will pass the info over to the controller to get the new fields
+                        var date_range = $('#endTimeFilterButton').val();
+                        var dates = date_range.split(" - ");
+                        var min = dates[0];
+                        var max = dates[1];
                     });
             });
 
             //Make the filter buttons into a daterangepicker.
-            $(".filterButton").daterangepicker();
+            $("#startTimeFilterButton").daterangepicker({
+                locale: {
+                    format: 'MM/DD/YYYY'
+                }
+            });
+
+            $("#endTimeFilterButton").daterangepicker({
+                locale: {
+                    format: 'MM/DD/YYYY'
+                }
+            });
         }
     });
+}
+
+function filterByDate() {
+    let test = $('#startTimeFilterButton').data.Start_Time;
 }
 
 $('.mydatatable').ready(function () {
@@ -111,8 +133,4 @@ $('.mydatatable').ready(function () {
     $('.mydatatable tfoot th').each(function () {
         $(this).html('<input type="text" placeholder="Search" />');
     });
-});
-
-document.getElementById("startTimeFilterButton").addEventListener("click", function () {
-    //window.alert("what");
 });
