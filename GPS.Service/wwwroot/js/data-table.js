@@ -44,7 +44,9 @@ function loadList() {
         responsive: true,
         "order": [[6, 'asc']],
 
+        //Function to set up all of the search/dropdown/daterangepicker boxes at the bottom of each column
         initComplete: function () {
+            //Drop down boxes for TagName and Type
             this.api().columns([Tag_Name, Type]).every(function () {
                 var column = this;
                 var select = $('<select><option value=""></option></select>')
@@ -66,7 +68,8 @@ function loadList() {
                 });
             });
 
-            this.api().columns([ID, SVN, Type]).every(function () {
+            //Search box for ID, SVN, and Reference
+            this.api().columns([ID, SVN, Reference]).every(function () {
                 localDataTable.columns().every(function () {
                 var column = this;
                     $('input', this.footer()).on('keyup change', function () {
@@ -80,26 +83,28 @@ function loadList() {
                 })
             });
 
+            //DateRangePicker for start time
             this.api().columns([Start_Time]).every(function () {
                 var column = this;
-                $('<input type="text" class="filterButton" id="startTimeFilterButton">')
+                $('<input type="text" class="dateFilter" id="startDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
                         //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#startTimeFilterButton').val();
+                        var date_range = $('#startDateFilter').val();
                         var dates = date_range.split(" - ");
                         var min = dates[0];
                         var max = dates[1];
                     });
             });
 
+            //DateRangePicker for end time
             this.api().columns([End_Time]).every(function () {
                 var column = this;
-                $('<input type="text" class="filterButton" id="endTimeFilterButton">')
+                $('<input type="text" class="dateFilter" id="endDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
                         //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#endTimeFilterButton').val();
+                        var date_range = $('#endDateFilter').val();
                         var dates = date_range.split(" - ");
                         var min = dates[0];
                         var max = dates[1];
@@ -107,16 +112,30 @@ function loadList() {
             });
 
             //Make the filter buttons into a daterangepicker.
-            $("#startTimeFilterButton").daterangepicker({
+            $("#startDateFilter").daterangepicker({
+                autoUpdateInput: false,
+                linkedCalendars: false,
                 locale: {
-                    format: 'MM/DD/YYYY'
+                    format: 'MM/DD/YYYY',
+                    cancelLabel: 'Clear'
                 }
             });
-
-            $("#endTimeFilterButton").daterangepicker({
+            //Same as above but for the End Time input
+            $("#endDateFilter").daterangepicker({
+                autoUpdateInput: false,
+                linkedCalendars: false,
                 locale: {
-                    format: 'MM/DD/YYYY'
+                    format: 'MM/DD/YYYY',
+                    cancelLabel: 'Clear'
                 }
+            });
+            //What happens when they click apply
+            $('input[class="dateFilter"]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            });
+            //What happens when they click clear
+            $('input[class="dateFilter"]').on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('');
             });
         }
     });
