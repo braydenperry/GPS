@@ -115,6 +115,7 @@ function loadList() {
             $("#startDateFilter").daterangepicker({
                 autoUpdateInput: false,
                 linkedCalendars: false,
+                showDropdowns: true,
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
@@ -124,6 +125,7 @@ function loadList() {
             $("#endDateFilter").daterangepicker({
                 autoUpdateInput: false,
                 linkedCalendars: false,
+                showDropdowns: true,
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
