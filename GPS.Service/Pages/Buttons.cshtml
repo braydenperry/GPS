@@ -1,10 +1,10 @@
 ﻿@page
 @model GPS.Service.ButtonsModel
 @{
-    ViewData["Title"] = "Buttons";
+    ViewData["Title"] = "Upload SOF";
 }
 
-<h1>Buttons</h1>
+<h1>Upload SOF</h1>
 
 <div class="row justify-content-center">
     <div class="col-lg-5">
@@ -14,11 +14,11 @@
                 <p>Upload an SOF File</p>
                 <label class="btn btn-primary" for="my-file-selector">
                     <input id="my-file-selector" type="file" name="file" style="display:none" onchange="$('#upload-file-info').html(this.files[0].name)">
-                    browse
+                    Browse
                 </label>
                 <span class='label label-info' id="upload-file-info"></span>
             </div>
-            <input class="btn btn-primary" type="submit" value="submit" />
+            <input class="btn btn-primary" type="submit" value="Submit" />
         </form>
     </div>
 </div>
