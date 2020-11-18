@@ -98,6 +98,47 @@ namespace GPS.Data
 
         }
 
+        public IEnumerable<Outage> Get(DateTime? startDateMin, DateTime? startDateMax, DateTime? endDateMin, DateTime? endDateMax)
+        {
+            return null;
+            if (AllOutages != null)
+            {
+                if (StartDateMinMax != null && EndDateMinMax != null)
+                {
+                    lock (SOFFileLock)
+                    {
+                        return null;
+                    }
+                }
+                else if (StartDateMinMax == null)
+                {
+                    lock (SOFFileLock)
+                    {
+                        return null;
+                    }
+                }
+                else if (EndDateMinMax == null)
+                {
+                    lock (SOFFileLock)
+                    {
+                        return AllOutages.Where(o => o.StartTime >= tagName.ToUpper());
+                    }
+                }
+                else
+                {
+                    //they are both null
+                    lock (SOFFileLock)
+                    {
+                        return AllOutages;
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
+
         public void Upload(Stream stream)
         {
 
