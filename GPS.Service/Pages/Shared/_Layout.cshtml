@@ -26,15 +26,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<form id="postFile" method="post" enctype="multipart/form-data" action="api/ManageOutages">
-								<label class="nav-link text-muted" for="my-file-selector" style="cursor:pointer">
-									<input class="" id="my-file-selector" type="file" name="file" accept=".sof" style="display:none"
-										   onchange="$('#upload-file-info').html(this.files[0].name); this.form.submit();" />
-									Upload
-								</label>
-							</form>
-							@*<button onclick="javascript:postFile();" onchange="$('#upload-file-info').html(this.files[0].name);
-																	this.form.submit();">Upload</button>*@
+							<a class="nav-link text-muted" asp-area="" asp-page="/Buttons">Upload</a>
 						</li>
 					</ul>
 				</div>
@@ -50,7 +42,7 @@
 
 	<footer class="border-top footer text-muted">
 		<div class="container">
-			&copy; 2020 - GPS.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+			&copy; 2020 - GPS.WebApp</a>
 		</div>
 	</footer>
 
