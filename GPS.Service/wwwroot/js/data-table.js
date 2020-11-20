@@ -89,11 +89,6 @@ function loadList() {
                 $('<input type="text" class="dateFilter" id="startDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
-                        //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#startDateFilter').val();
-                        var dates = date_range.split(" - ");
-                        var min = dates[0];
-                        var max = dates[1];
                     });
             });
 
@@ -103,11 +98,6 @@ function loadList() {
                 $('<input type="text" class="dateFilter" id="endDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
-                        //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#endDateFilter').val();
-                        var dates = date_range.split(" - ");
-                        var min = dates[0];
-                        var max = dates[1];
                     });
             });
 
@@ -138,6 +128,7 @@ function loadList() {
             //What happens when they click apply
             $('input[class="dateFilter"]').on('apply.daterangepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                filterByDate();
             });
             //What happens when they click clear
             $('input[class="dateFilter"]').on('cancel.daterangepicker', function (ev, picker) {
@@ -148,7 +139,10 @@ function loadList() {
 }
 
 function filterByDate() {
-    let test = $('#startTimeFilterButton').data.Start_Time;
+    //If no date is chosen, the min will be == "", and the max will be undefiined. Might need to account for that
+    var startDateRange = $('#startDateFilter').val();
+    var endDateRange = $('#endDateFilter').val();
+
 }
 
 $('.mydatatable').ready(function () {

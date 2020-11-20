@@ -25,12 +25,12 @@ namespace GPS.DataService.Controllers
         #region HTTP Methods
 
         [HttpGet("{StartDateMinMax, EndDateMinMax}")]
-        public IActionResult Get(DateTime? startDateMin, DateTime? startDateMax, DateTime? endDateMin, DateTime? endDateMax)
+        public IActionResult Get(string? startDateMinMax, string? endDateMinMax)
         {
 
             try
             {
-                return Json(_outageRepository.Get(startDateMin, startDateMax, endDateMin, endDateMax));
+                return Json(_outageRepository.Get(startDateMinMax, endDateMinMax));
             }
             catch (Exception)
             {
