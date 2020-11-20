@@ -128,7 +128,7 @@ namespace GPS.Data
                     lock (SOFFileLock)
                     {
                         return AllOutages.Where(o => o.StartTime >= startMin && o.StartTime <= startMax &&
-                                                     o.EndTime >= endMin     && o.EndTime   <= endMax);
+                                                     o.EndTime >= endMin     && o.EndTime <= endMax);
                     }
                 } //Query based off of startDate
                 else if (startDateMinMax != null && endDateMinMax == null)
