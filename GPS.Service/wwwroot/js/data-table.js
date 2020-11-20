@@ -165,17 +165,12 @@ function ValidateUploadFile() {
 	var validFileExtension = "sof";
 	var fileInput = document.getElementById('my-file-selector');	
 	var fileExtension = fileInput.value.split('.').pop();
-	//var fileExtension = filePath.split('.').pop();
 
 	if (fileExtension != validFileExtension) {
-		alert('Invalid file type. Please upload an SOF');
-		//fileInput.value = '';
-		return false;
+		alert('Invalid file type. Please upload an SOF.');
 	}
 	else {
 		//$('#upload-file-info').html(this.files[0].name);
-		this.form.submit();
+		//this.form.submit();
 	}
-
-	return true;
 }
