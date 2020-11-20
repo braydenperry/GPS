@@ -24,15 +24,13 @@
                             <a class="nav-link text-muted" asp-area="" asp-page="/SOFDownload">Download</a>
                         </li>
 						<li class="nav-item">
-							<label class="nav-link text-muted" for="my-file-selector" style="cursor: pointer">
-								<input id="my-file-selector" type="file" name="file" style="display:none" 
-                                       onchange="$('#upload-file-info').html(this.files[0].name); this.form.submit()" accept=".sof">
-								Upload
-							</label>
-
-
-
-							@*<a class="nav-link text-muted" asp-area="" asp-page="/Buttons">Upload</a>*@
+							<form method="post" enctype="multipart/form-data" action="api/ManageOutages">
+								<label class="nav-link text-muted" for="my-file-selector" style="cursor:pointer">
+									<input class="" id="my-file-selector" type="file" name="file" accept=".sof" style="display:none"
+									        onchange="ValidateUploadFile()"/>
+									Upload
+								</label>
+							</form>
 						</li>
                     </ul>
                 </div>
