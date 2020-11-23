@@ -22,19 +22,24 @@ namespace GPS.DataService.Controllers
             _outageRepository = outageRepository;
         }
         #endregion
+
         #region HTTP Methods
 
-        [HttpGet("{StartDateMinMax, EndDateMinMax}")]
-        public IActionResult Get(DateTime? startDateMin, DateTime? startDateMax, DateTime? endDateMin, DateTime? endDateMax)
+        [HttpGet("{StartDateMinMax?}/{EndDateMinMax?}")]
+        public IActionResult Get(string startDateMinMax = null, string endDateMinMax = null)
         {
-
             try
             {
-                return Json(_outageRepository.Get(startDateMin, startDateMax, endDateMin, endDateMax));
+                if (_outageRepository.Get() == null)
+                {
+                    return StatusCode(404);
+                }
+
+                return Json(_outageRepository.Get(startDateMinMax, endDateMinMax));
             }
             catch (Exception)
             {
-                return StatusCode(404);
+                return StatusCode(500);
             }
 
         }

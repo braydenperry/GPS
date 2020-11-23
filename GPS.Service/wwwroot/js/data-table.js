@@ -6,16 +6,18 @@ const Start_Time = 3;
 const End_Time = 4;
 const Type = 5;
 const Reference = 6;
+let StartDateRange = "";
+let EndDateRange = "";
 
 $(document).ready(function () {
     loadList();
 });
 
-function loadList() {
+function loadList(datefilter) {
     localDataTable = $('#DT_load').DataTable({
         lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
         "ajax": {
-            "url": "/api/queryoutages",
+            "url": (datefilter == null) ? "/api/queryoutages" : "/api/datefilter/" + datefilter,
             "type": "GET",
             "datatype": "json",
             "dataSrc": ""
@@ -89,11 +91,6 @@ function loadList() {
                 $('<input type="text" class="dateFilter" id="startDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
-                        //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#startDateFilter').val();
-                        var dates = date_range.split(" - ");
-                        var min = dates[0];
-                        var max = dates[1];
                     });
             });
 
@@ -103,11 +100,6 @@ function loadList() {
                 $('<input type="text" class="dateFilter" id="endDateFilter">')
                     .appendTo($(column.footer()).empty())
                     .on('change', function () {
-                        //here is where we will pass the info over to the controller to get the new fields
-                        var date_range = $('#endDateFilter').val();
-                        var dates = date_range.split(" - ");
-                        var min = dates[0];
-                        var max = dates[1];
                     });
             });
 
@@ -123,6 +115,7 @@ function loadList() {
                     cancelLabel: 'Clear'
                 }
             });
+
             //Same as above but for the End Time input
             $("#endDateFilter").daterangepicker({
                 autoUpdateInput: false,
@@ -135,20 +128,58 @@ function loadList() {
                     cancelLabel: 'Clear'
                 }
             });
+
+            //If there is a global variable set, populte the value with that global (using a global because of the destoy function)
+            $('#startDateFilter').val(StartDateRange);
+            $('#endDateFilter').val(EndDateRange);
+
             //What happens when they click apply
             $('input[class="dateFilter"]').on('apply.daterangepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+                filterByDate();
             });
             //What happens when they click clear
             $('input[class="dateFilter"]').on('cancel.daterangepicker', function (ev, picker) {
-                $(this).val('');
+                //Clear the text box
+                $(this).val("");
+                //Clear the globals
+                if (this.id == "startDateFilter") {
+                    StartDateRange = "";
+                } else if (this.id == "endDateFilter") {
+                    EndDateRange = "";
+                }
+                //Call our api with the newly updated info
+                filterByDate();
+                
             });
         }
     });
 }
 
 function filterByDate() {
-    let test = $('#startTimeFilterButton').data.Start_Time;
+    //If no date is chosen, the min will be == "", and the max will be undefiined.
+    //Before parsing a date will appear as: 01/01/2019 - 12/12/2020
+    //After parsing a date will appear as: 01-01-201912-12-2020
+    //If a date is not selected, the end date range will be "".
+    var startDateRange = $('#startDateFilter').val();
+    StartDateRange = startDateRange;
+    var startDateRange = startDateRange.replace(/-/g, "_");
+    var startDateRange = startDateRange.replace(/ /g, "");
+    var startDateRange = startDateRange.replace(/\//g, "-");
+
+    var endDateRange = $('#endDateFilter').val();
+    EndDateRange = endDateRange;
+    var endDateRange = endDateRange.replace(/-/g, "_");
+    var endDateRange = endDateRange.replace(/ /g, "");
+    var endDateRange = endDateRange.replace(/\//g, "-");
+
+
+    // Destroy the old data table and reload it with the new filter
+    localDataTable.destroy();
+    if (startDateRange == "") {
+        startDateRange = " "
+    }
+    loadList(startDateRange + "/" + endDateRange);
 }
 
 $('.mydatatable').ready(function () {

@@ -41,7 +41,7 @@ namespace GPS.DataService.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(400);
+                return StatusCode(500);
             }
 
         }
@@ -57,7 +57,7 @@ namespace GPS.DataService.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(400);
+                return StatusCode(500);
             }
 
         }
