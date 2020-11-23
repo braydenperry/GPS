@@ -107,7 +107,7 @@ namespace GPS.Data
         /// <param name="StartDateMinMax"></param>
         /// <param name="EndDateMinMax"></param>
         /// <returns></returns>
-        public IEnumerable<Outage> Get(string? startDateMinMax, string? endDateMinMax)
+        public IEnumerable<Outage> Get(string startDateMinMax = null, string endDateMinMax = null)
         {
             //Tells the DateTime parser to parse for US time formats
             CultureInfo us = new CultureInfo("en-US");
@@ -118,12 +118,12 @@ namespace GPS.Data
                 if (startDateMinMax != null && endDateMinMax != null)
                 {
                     //Get the dates in a place that you can convert them from a string to a DateTime
-                    var startDates = startDateMinMax.Split(new string[] { " - " }, StringSplitOptions.None);
-                    DateTime startMin = DateTime.ParseExact(startDates[0], "MM/dd/yyyy", us);
-                    DateTime startMax = DateTime.ParseExact(startDates[1], "MM/dd/yyyy", us);
-                    var endDates = endDateMinMax.Split(new string[] { " - " }, StringSplitOptions.None);
-                    DateTime endMin = DateTime.ParseExact(endDates[0], "MM/dd/yyyy", us);
-                    DateTime endMax = DateTime.ParseExact(endDates[1], "MM/dd/yyyy", us);
+                    var startDates = startDateMinMax.Split('_');
+                    DateTime startMin = DateTime.ParseExact(startDates[0], "MM-dd-yyyy", us);
+                    DateTime startMax = DateTime.ParseExact(startDates[1], "MM-dd-yyyy", us);
+                    var endDates = endDateMinMax.Split('_');
+                    DateTime endMin = DateTime.ParseExact(endDates[0], "MM-dd-yyyy", us);
+                    DateTime endMax = DateTime.ParseExact(endDates[1], "MM-dd-yyyy", us);
 
                     lock (SOFFileLock)
                     {
@@ -134,9 +134,9 @@ namespace GPS.Data
                 else if (startDateMinMax != null && endDateMinMax == null)
                 {
                     //Get the dates in a place that you can convert them from a string to a DateTime
-                    var startDates = startDateMinMax.Split(new string[] { " - " }, StringSplitOptions.None);
-                    DateTime startMin = DateTime.ParseExact(startDates[0], "MM/dd/yyyy", us);
-                    DateTime startMax = DateTime.ParseExact(startDates[1], "MM/dd/yyyy", us);
+                    var startDates = startDateMinMax.Split('_');
+                    DateTime startMin = DateTime.ParseExact(startDates[0], "MM-dd-yyyy", us);
+                    DateTime startMax = DateTime.ParseExact(startDates[1], "MM-dd-yyyy", us);
 
                     lock (SOFFileLock)
                     {
@@ -146,9 +146,9 @@ namespace GPS.Data
                 else if (endDateMinMax != null && startDateMinMax == null)
                 {
                     //Get the dates in a place that you can convert them from a string to a DateTime
-                    var endDates = endDateMinMax.Split(new string[] { " - " }, StringSplitOptions.None);
-                    DateTime endMin = DateTime.ParseExact(endDates[0], "MM/dd/yyyy", us);
-                    DateTime endMax = DateTime.ParseExact(endDates[1], "MM/dd/yyyy", us);
+                    var endDates = endDateMinMax.Split('_');
+                    DateTime endMin = DateTime.ParseExact(endDates[0], "MM-dd-yyyy", us);
+                    DateTime endMax = DateTime.ParseExact(endDates[1], "MM-dd-yyyy", us);
 
                     lock (SOFFileLock)
                     {

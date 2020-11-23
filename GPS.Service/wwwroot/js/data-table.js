@@ -141,7 +141,15 @@ function loadList() {
 function filterByDate() {
     //If no date is chosen, the min will be == "", and the max will be undefiined. Might need to account for that
     var startDateRange = $('#startDateFilter').val();
+    var formattedStartDateRange = startDateRange.replace("-", "_");
+    var formattedStartDateRange = startDateRange.replace(" ", "");
+    var formattedStartDateRange = startDateRange.replace("/", "-");
+
     var endDateRange = $('#endDateFilter').val();
+    var formattedEndDateRange = endDateRange.replace("-", "_");
+    var formattedEndDateRange = endDateRange.replace(" ", "");
+    var formattedEndDateRange = endDateRange.replace("/", "-");
+    //returns "01/01/2020 - 01/01/2020"
 
 }
 
