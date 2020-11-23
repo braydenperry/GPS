@@ -25,31 +25,21 @@ namespace GPS.DataService.Controllers
 
         #region HTTP Methods
 
-        //[HttpGet]
-        //public IActionResult Get()
-        //{
-        //    //If there is no filter, return a list of all outages
-        //    try
-        //    {
-        //        return Json(_outageRepository.Get());
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(404);
-        //    }
-
-        //}
-
         [HttpGet("{StartDateMinMax?}/{EndDateMinMax?}")]
         public IActionResult Get(string startDateMinMax = null, string endDateMinMax = null)
         {
             try
             {
+                if (_outageRepository.Get() == null)
+                {
+                    return StatusCode(404);
+                }
+
                 return Json(_outageRepository.Get(startDateMinMax, endDateMinMax));
             }
             catch (Exception)
             {
-                return StatusCode(404);
+                return StatusCode(500);
             }
 
         }

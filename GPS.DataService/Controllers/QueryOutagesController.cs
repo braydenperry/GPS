@@ -26,11 +26,15 @@ namespace GPS.DataService.Controllers
 
             try
             {
+                if (_outageRepository.Get() == null)
+                {
+                    return StatusCode(404);
+                }
                 return Json(_outageRepository.Get());
             }
             catch (Exception)
             {
-                return StatusCode(404);
+                return StatusCode(500);
             }
 
         }
@@ -41,11 +45,15 @@ namespace GPS.DataService.Controllers
 
             try
             {
+                if (_outageRepository.Get() == null)
+                {
+                    return StatusCode(404);
+                }
                 return Json(_outageRepository.Get(tagName));
             }
             catch (Exception)
             {
-                return StatusCode(404);
+                return StatusCode(500);
             }
 
         }

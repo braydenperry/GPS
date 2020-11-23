@@ -6,6 +6,8 @@ const Start_Time = 3;
 const End_Time = 4;
 const Type = 5;
 const Reference = 6;
+let StartDateRange = "";
+let EndDateRange = "";
 
 $(document).ready(function () {
     loadList();
@@ -106,25 +108,31 @@ function loadList(datefilter) {
                 autoUpdateInput: false,
                 linkedCalendars: false,
                 showDropdowns: true,
-                startDate: "01/01/1987",
+                startDate: "01/01/1993",
                 endDate: "12/31/2020",
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
                 }
             });
+
             //Same as above but for the End Time input
             $("#endDateFilter").daterangepicker({
                 autoUpdateInput: false,
                 linkedCalendars: false,
                 showDropdowns: true,
-                startDate: "01/01/1987",
-                endDate: "12/31/20120",
+                startDate: "01/01/1993",
+                endDate: "12/31/2020",
                 locale: {
                     format: 'MM/DD/YYYY',
                     cancelLabel: 'Clear'
                 }
             });
+
+            //If there is a global variable set, populte the value with that global (using a global because of the destoy function)
+            $('#startDateFilter').val(StartDateRange);
+            $('#endDateFilter').val(EndDateRange);
+
             //What happens when they click apply
             $('input[class="dateFilter"]').on('apply.daterangepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
@@ -132,7 +140,17 @@ function loadList(datefilter) {
             });
             //What happens when they click clear
             $('input[class="dateFilter"]').on('cancel.daterangepicker', function (ev, picker) {
-                $(this).val('');
+                //Clear the text box
+                $(this).val("");
+                //Clear the globals
+                if (this.id == "startDateFilter") {
+                    StartDateRange = "";
+                } else if (this.id == "endDateFilter") {
+                    EndDateRange = "";
+                }
+                //Call our api with the newly updated info
+                filterByDate();
+                
             });
         }
     });
@@ -144,17 +162,23 @@ function filterByDate() {
     //After parsing a date will appear as: 01-01-201912-12-2020
     //If a date is not selected, the end date range will be "".
     var startDateRange = $('#startDateFilter').val();
+    StartDateRange = startDateRange;
     var startDateRange = startDateRange.replace(/-/g, "_");
     var startDateRange = startDateRange.replace(/ /g, "");
     var startDateRange = startDateRange.replace(/\//g, "-");
 
     var endDateRange = $('#endDateFilter').val();
+    EndDateRange = endDateRange;
     var endDateRange = endDateRange.replace(/-/g, "_");
     var endDateRange = endDateRange.replace(/ /g, "");
     var endDateRange = endDateRange.replace(/\//g, "-");
 
+
     // Destroy the old data table and reload it with the new filter
     localDataTable.destroy();
+    if (startDateRange == "") {
+        startDateRange = " "
+    }
     loadList(startDateRange + "/" + endDateRange);
 }
 
