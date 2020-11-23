@@ -11,11 +11,11 @@ $(document).ready(function () {
     loadList();
 });
 
-function loadList() {
+function loadList(datefilter) {
     localDataTable = $('#DT_load').DataTable({
         lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
         "ajax": {
-            "url": "/api/queryoutages",
+            "url": (datefilter == null) ? "/api/queryoutages" : "/api/datefilter/" + datefilter,
             "type": "GET",
             "datatype": "json",
             "dataSrc": ""
@@ -139,18 +139,23 @@ function loadList() {
 }
 
 function filterByDate() {
-    //If no date is chosen, the min will be == "", and the max will be undefiined. Might need to account for that
+    //If no date is chosen, the min will be == "", and the max will be undefiined.
+    //Before parsing a date will appear as: 01/01/2019 - 12/12/2020
+    //After parsing a date will appear as: 01-01-201912-12-2020
+    //If a date is not selected, the end date range will be "".
     var startDateRange = $('#startDateFilter').val();
-    var formattedStartDateRange = startDateRange.replace("-", "_");
-    var formattedStartDateRange = startDateRange.replace(" ", "");
-    var formattedStartDateRange = startDateRange.replace("/", "-");
+    var startDateRange = startDateRange.replace(/-/g, "_");
+    var startDateRange = startDateRange.replace(/ /g, "");
+    var startDateRange = startDateRange.replace(/\//g, "-");
 
     var endDateRange = $('#endDateFilter').val();
-    var formattedEndDateRange = endDateRange.replace("-", "_");
-    var formattedEndDateRange = endDateRange.replace(" ", "");
-    var formattedEndDateRange = endDateRange.replace("/", "-");
-    //returns "01/01/2020 - 01/01/2020"
+    var endDateRange = endDateRange.replace(/-/g, "_");
+    var endDateRange = endDateRange.replace(/ /g, "");
+    var endDateRange = endDateRange.replace(/\//g, "-");
 
+    // Destroy the old data table and reload it with the new filter
+    localDataTable.destroy();
+    loadList(startDateRange + "/" + endDateRange);
 }
 
 $('.mydatatable').ready(function () {

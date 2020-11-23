@@ -22,6 +22,7 @@ namespace GPS.DataService.Controllers
             _outageRepository = outageRepository;
         }
         #endregion
+
         #region HTTP Methods
 
         //[HttpGet]

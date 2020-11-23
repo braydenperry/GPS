@@ -16,7 +16,7 @@ namespace GPS.Data
         /// <param name="StartDateMinMax"></param>
         /// <param name="EndDateMinMax"></param>
         /// <returns></returns>
-        public IEnumerable<Outage> Get(string? startDateMinMax, string? endDateMinMax);
+        public IEnumerable<Outage> Get(string startDateMinMax = null, string endDateMinMax = null);
 
         public void Upload(Stream stream);
 
