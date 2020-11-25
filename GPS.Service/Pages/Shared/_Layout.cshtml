@@ -22,12 +22,15 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-page="/Index">All Outages</a>
-                        <li class="nav-item">
                             <a class="nav-link text-muted" asp-area="" asp-page="/SOFDownload">Download</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-muted" asp-area="" asp-page="/Buttons">Upload</a>
+                            <form id="file-upload-form" method="post" enctype="multipart/form-data" action="api/manageoutages">
+                                <label class="nav-link text-muted cursor-pointer m-0" for="file-upload">
+                                    <input id="file-upload" type="file" name="file-upload" accept=".sof" onchange="uploadFile()" hidden />
+                                    Upload
+                                </label>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -43,10 +46,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - GPS.WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - GPS.WebApp
         </div>
     </footer>
 
+    <script src="~/js/site.js"></script>
     <script src="~/lib/jquery/dist/jquery-3.3.1.min.js"></script>
     <script src="~/lib/cloudflare/popper.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
