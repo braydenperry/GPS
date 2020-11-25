@@ -159,21 +159,3 @@ $('.mydatatable').ready(function () {
 		$(this).html('<input type="text" placeholder="Search" />');
 	});
 });
-
-function ValidateUploadFile() {
-	//allowed extension
-	var validFileExtension = "sof";
-	var fileInput = document.getElementById('my-file-selector');
-	var fileExtension = fileInput.value.split('.').pop();
-	var form = document.getElementById('form');
-
-	//if file extension is not .sof
-	if (fileExtension != validFileExtension) {
-		alert('Invalid file type. Please upload an SOF.');
-	}
-	else {
-		//Sends page back to home screen
-		form.submit();
-		window.location.href = "/";
-	}
-}
