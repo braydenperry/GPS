@@ -17,7 +17,7 @@ function loadList(datefilter) {
     localDataTable = $('#DT_load').DataTable({
         lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]],
         "ajax": {
-            "url": (datefilter == null) ? "/api/queryoutages" : "/api/datefilter/" + datefilter,
+            "url": (datefilter == null) ? "/v1/outages" : "/v1/outages" + datefilter,
             "type": "GET",
             "datatype": "json",
             "dataSrc": ""
@@ -179,7 +179,16 @@ function filterByDate() {
     if (startDateRange == "") {
         startDateRange = " "
     }
-    loadList(startDateRange + "/" + endDateRange);
+
+    if (startDateRange != null && endDateRange == null) {
+        loadList("?startDateMinMax=" + startDateRange);
+    }
+    else if (startDateRange == null && endDateRange != null) {
+        loadList("?endDateMinMax=" + endDateRange);
+    }
+    else if (startDateRange != null && endDateRange != null) {
+        loadList("?startDateMinMax=" + startDateRange + "&endDateMinMax=" + endDateRange);
+    }
 }
 
 $('.mydatatable').ready(function () {

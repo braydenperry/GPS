@@ -4,7 +4,7 @@ using System;
 
 namespace GPS.DataService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/outages")]
     [ApiController]
     public class QueryOutagesController : Controller
     {
@@ -21,41 +21,31 @@ namespace GPS.DataService.Controllers
 
         #region HTTP Methods
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] QueryParameters parameters)
         {
-
             try
             {
-                if (_outageRepository.Get() == null)
+                if (ModelState.IsValid)
                 {
-                    return StatusCode(404);
+                    if (parameters.TagName != null)
+                    {
+                        return Json(_outageRepository.Get(parameters.TagName));
+                    }
+                    
+                    if (parameters.StartDateMinMax != null || parameters.EndDateMinMax != null)
+                    {
+                        return Json(_outageRepository.Get(parameters.StartDateMinMax, parameters.EndDateMinMax));
+                    }
+
+                    return Json(_outageRepository.Get());
                 }
-                return Json(_outageRepository.Get());
+
+                return StatusCode(400);
             }
             catch (Exception)
             {
                 return StatusCode(500);
             }
-
-        }
-
-        [HttpGet("{tagName}")]
-        public IActionResult Get(string tagName)
-        {
-
-            try
-            {
-                if (_outageRepository.Get() == null)
-                {
-                    return StatusCode(404);
-                }
-                return Json(_outageRepository.Get(tagName));
-            }
-            catch (Exception)
-            {
-                return StatusCode(500);
-            }
-
         }
         #endregion
     }

@@ -5,7 +5,7 @@ using System;
 
 namespace GPS.DataService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/outages")]
     [ApiController]
     public class ManageOutagesController : Controller
     {
@@ -24,10 +24,8 @@ namespace GPS.DataService.Controllers
         [HttpPost]
         public IActionResult Post(IFormFile file)
         {
-
             try
             {
-
                 if (file != null)
                 {
                     _outageRepository.Upload(file.OpenReadStream());
@@ -37,19 +35,16 @@ namespace GPS.DataService.Controllers
                 {
                     throw new ArgumentNullException();
                 }
-
             }
             catch (Exception)
             {
                 return StatusCode(500);
             }
-
         }
 
         [HttpDelete]
         public IActionResult Delete()
         {
-
             try
             {
                 _outageRepository.Delete();
@@ -59,7 +54,6 @@ namespace GPS.DataService.Controllers
             {
                 return StatusCode(500);
             }
-
         }
         #endregion
     }
